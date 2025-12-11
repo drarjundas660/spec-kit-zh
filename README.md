@@ -201,6 +201,10 @@ specify-zh check     # 检测本机工具链（git、AI agent 等）
 
 如需查看完整分步说明，请阅读 [Spec-Driven Development 全流程指南](./spec-driven.md)。
 
+### 7. 常用工作流速查
+
+首次接触时，推荐按 `constitution -> specify -> plan -> tasks -> implement` 的顺序推进；如果需求仍有模糊点，可以先运行 `/speckit.clarify` 再进入计划阶段。
+
 <a id="video-overview"></a>
 ## 📽️ 视频概览
 
