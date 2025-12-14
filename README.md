@@ -254,6 +254,7 @@ specify-zh check     # 检测本机工具链（git、AI agent 等）
 > [!TIP]
 > 国内主流 AI 编码工具（通义灵码、DeepSeek Coder、百度 Comate、MarsCode 等）均可通过 `--ai generic` 模式接入。
 > 详见 [国内大模型接入指南](./docs/domestic-llm.md)。
+> 如果团队内部有自定义提示模板或命令目录，也可以配合 `--ai-commands-dir` 统一接入现有工作流。
 
 <a id="specify-zh-cli-reference"></a>
 ## 🔧 specify-zh 命令参考
