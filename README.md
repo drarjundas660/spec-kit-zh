@@ -266,6 +266,7 @@ specify-zh check     # 检测本机工具链（git、AI agent 等）
 | 命令 | 说明 |
 | ---- | ---- |
 | `init`  | 使用最新模板初始化一个新的 Specify 项目 |
+| `version` | 显示当前 CLI 版本与运行环境信息 |
 | `check` | 检查本机是否安装所需工具（如 `git`、`claude`、`gemini`、`cursor-agent`、`codex`、`kiro-cli`、`qodercli`、`vibe` 等） |
 
 ### `specify-zh init` 参数与选项
