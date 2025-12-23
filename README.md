@@ -368,6 +368,8 @@ specify-zh check
 
 规范驱动开发流程的必备命令：
 
+推荐顺序：先用 `/speckit.constitution` 明确治理原则，再逐步进入 `/speckit.specify`、`/speckit.plan`、`/speckit.tasks` 与 `/speckit.implement`。
+
 | 命令                    | 描述                                                              |
 | ----------------------- | ------------------------------------------------------------------------ |
 | `/speckit.constitution` | 创建或更新项目治理原则与开发准则 |
