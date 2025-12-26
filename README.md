@@ -449,6 +449,8 @@ specify-zh check
 - [Python 3.11+](https://www.python.org/downloads/)
 - [Git](https://git-scm.com/downloads)
 
+如果你的网络环境受限，建议提前准备好 GitHub 访问代理或在安装阶段配置镜像源，以减少初始化与升级时的等待成本。
+
 如果在与 Agent 工具的集成中遇到任何问题，请提交 issue，以便我们不断优化集成体验。
 
 <a id="learn-more"></a>
