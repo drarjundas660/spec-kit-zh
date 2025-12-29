@@ -459,6 +459,7 @@ specify-zh check
 - **[完整的规范驱动开发方法论](./spec-driven.md)** - 深入了解整个工作流
 - **[详细演练流程](#detailed-process)** - 分步操作指南
 - **[从旧版本迁移](./docs/migration.md)** - 从原版 spec-kit 等的迁移指南
+- **[升级指南](./docs/upgrade.md)** - 查看版本升级建议与常见变更处理方式
 
 ---
 
