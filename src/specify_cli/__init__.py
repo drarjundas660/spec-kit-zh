@@ -908,6 +908,13 @@ def download_template_from_github(ai_assistant: str, download_dir: Path, *, scri
             release_data = response.json()
         except ValueError as je:
             raise RuntimeError(f"Failed to parse release JSON: {je}\nRaw (truncated 400): {response.text[:400]}")
+    except (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.ConnectError) as e:
+        console.print("[red]连接 GitHub API 超时或失败。[/red]")
+        console.print("[yellow]提示：如在国内网络环境下，请设置终端代理加速：[/yellow]")
+        console.print("  [cyan]export HTTPS_PROXY=http://127.0.0.1:7890[/cyan]")
+        console.print("  [cyan]export HTTP_PROXY=http://127.0.0.1:7890[/cyan]")
+        console.print(Panel(str(e), title="网络出错", border_style="red"))
+        raise typer.Exit(1)
     except Exception as e:
         console.print("[red]获取发布信息失败[/red]")
         console.print(Panel(str(e), title="获取失败", border_style="red"))
@@ -977,6 +984,12 @@ def download_template_from_github(ai_assistant: str, download_dir: Path, *, scri
                     else:
                         for chunk in response.iter_bytes(chunk_size=8192):
                             f.write(chunk)
+    except (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.ConnectError) as e:
+        console.print("[red]下载模板数据包网络连接超时或失败。[/red]")
+        console.print("[yellow]提示：如在国内网络环境下，请设置网络代理：[/yellow]")
+        console.print("  [cyan]export HTTPS_PROXY=http://127.0.0.1:7890[/cyan]")
+        console.print("  [cyan]请查阅 docs/china-network.md 获取国内加速方案全解。[/cyan]")
+        raise typer.Exit(1)
     except Exception as e:
         console.print("[red]下载模板失败[/red]")
         detail = str(e)
