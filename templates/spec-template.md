@@ -1,0 +1,115 @@
+# 功能规格说明：[功能名称]
+
+**功能分支**：`[###-feature-name]`  
+**创建日期**：[DATE]  
+**状态**：草稿  
+**输入**：用户描述："$ARGUMENTS"
+
+## 用户场景与测试（必填）
+
+<!--
+  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
+  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
+  you should still have a viable MVP (Minimum Viable Product) that delivers value.
+  
+  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
+  Think of each story as a standalone slice of functionality that can be:
+  - Developed independently
+  - Tested independently
+  - Deployed independently
+  - Demonstrated to users independently
+-->
+
+### 用户故事 1 - [简短标题]（优先级：P1）
+
+[请用简明语言描述该用户旅程]
+
+**优先级原因**：[解释该故事的价值以及优先级原因]
+
+**独立测试**：[说明如何独立验证该故事，例如“通过[具体操作]即可完整测试，并交付[具体价值]”]
+
+**验收场景**：
+
+1. **给定** [初始状态]，**当** [执行动作]，**则** [预期结果]
+2. **给定** [初始状态]，**当** [执行动作]，**则** [预期结果]
+
+---
+
+### 用户故事 2 - [简短标题]（优先级：P2）
+
+[请用简明语言描述该用户旅程]
+
+**优先级原因**：[解释该故事的价值以及优先级原因]
+
+**独立测试**：[说明如何独立验证该故事]
+
+**验收场景**：
+
+1. **给定** [初始状态]，**当** [执行动作]，**则** [预期结果]
+
+---
+
+### 用户故事 3 - [简短标题]（优先级：P3）
+
+[请用简明语言描述该用户旅程]
+
+**优先级原因**：[解释该故事的价值以及优先级原因]
+
+**独立测试**：[说明如何独立验证该故事]
+
+**验收场景**：
+
+1. **给定** [初始状态]，**当** [执行动作]，**则** [预期结果]
+
+---
+
+[按需继续添加更多用户故事，并为每个故事指定优先级]
+
+### 边界情况
+
+<!--
+  ACTION REQUIRED: The content in this section represents placeholders.
+  Fill them out with the right edge cases.
+-->
+
+- 当出现[边界条件]时，会发生什么？
+- 系统如何处理[错误场景]？
+
+## 需求（必填）
+
+<!--
+  ACTION REQUIRED: The content in this section represents placeholders.
+  Fill them out with the right functional requirements.
+-->
+
+### 功能需求
+
+- **FR-001**：系统必须[具体能力，例如“允许用户创建账户”]
+- **FR-002**：系统必须[具体能力，例如“校验邮箱地址”]  
+- **FR-003**：用户必须能够[关键交互，例如“重置密码”]
+- **FR-004**：系统必须[数据需求，例如“持久化保存用户偏好”]
+- **FR-005**：系统必须[行为要求，例如“记录所有安全事件”]
+
+*需求不明确时的标注示例：*
+
+- **FR-006**：系统必须通过[NEEDS CLARIFICATION: 未指定认证方式，例如邮箱密码、SSO 或 OAuth]对用户进行认证
+- **FR-007**：系统必须将用户数据保留[NEEDS CLARIFICATION: 未指定保留期限]
+
+### 关键实体（若功能涉及数据则填写）
+
+- **[实体 1]**：[表示什么，以及关键属性，不包含实现细节]
+- **[实体 2]**：[表示什么，以及与其他实体的关系]
+
+## 成功标准（必填）
+
+<!--
+  ACTION REQUIRED: Define measurable success criteria.
+  These must be technology-agnostic and measurable.
+-->
+
+### 可衡量结果
+
+- **SC-001**：[可衡量指标，例如“用户可在 2 分钟内完成账户创建”]
+- **SC-002**：[可衡量指标，例如“系统可在不明显退化的情况下支持 1000 名并发用户”]
+- **SC-003**：[用户满意度指标，例如“90% 的用户可在首次尝试中完成主要任务”]
+- **SC-004**：[业务指标，例如“与[X]相关的支持工单减少 50%”]
