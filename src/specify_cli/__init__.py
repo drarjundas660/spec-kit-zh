@@ -321,7 +321,7 @@ BANNER = """
 ╚══════╝╚═╝     ╚══════╝ ╚═════╝╚═╝╚═╝        ╚═╝   
 """
 
-TAGLINE = "GitHub Spec Kit - 规范驱动开发工具包"
+TAGLINE = "GitHub Spec Kit ZH - 规范驱动开发工具包"
 class StepTracker:
     """Track and render hierarchical steps without emojis, similar to Claude Code tree output.
     Supports live auto-refresh via an attached refresh callback.
@@ -601,7 +601,7 @@ def check_tool(tool: str, tracker: StepTracker = None) -> bool:
     if tool == "claude":
         if CLAUDE_LOCAL_PATH.exists() and CLAUDE_LOCAL_PATH.is_file():
             if tracker:
-                tracker.complete(tool, "available")
+                tracker.complete(tool, "已安装")
             return True
     
     if tool == "kiro-cli":
@@ -613,9 +613,9 @@ def check_tool(tool: str, tracker: StepTracker = None) -> bool:
     
     if tracker:
         if found:
-            tracker.complete(tool, "available")
+            tracker.complete(tool, "已安装")
         else:
-            tracker.error(tool, "not found")
+            tracker.error(tool, "未安装")
     
     return found
 
@@ -1804,11 +1804,11 @@ def init(
 def check():
     """检查所需工具是否已安装。"""
     show_banner()
-    console.print("[bold]正在检查已安装工具...[/bold]\n")
+    console.print("[bold]正在检查 specify-zh 运行环境...[/bold]\n")
 
-    tracker = StepTracker("检查可用工具")
+    tracker = StepTracker("specify-zh 环境检查")
 
-    tracker.add("git", "Git version control")
+    tracker.add("git", "Git 版本控制")
     git_ok = check_tool("git", tracker=tracker)
 
     agent_results = {}
@@ -1836,7 +1836,7 @@ def check():
 
     console.print(tracker.render())
 
-    console.print("\n[bold green]Specify CLI 已可使用！[/bold green]")
+    console.print("\n[bold green]specify-zh 已可使用！[/bold green]")
 
     if not git_ok:
         console.print("[dim]提示：安装 git 以启用仓库管理[/dim]")
