@@ -24,7 +24,7 @@
 - [📽️ 视频概览](#️-视频概览)
 - [🚶 社区演练项目](#-社区演练项目)
 - [🤖 支持的 AI 代理](#-支持的-ai-代理)
-- [🔧 Specify CLI 参考](#-specify-cli-参考)
+- [🔧 specify-zh 命令参考](#-specify-zh-命令参考)
 - [📚 核心理念](#-核心理念)
 - [🌟 开发阶段](#-开发阶段)
 - [🎯 实验目标](#-实验目标)
@@ -42,7 +42,7 @@
 
 ## ⚡ 快速开始
 
-### 1. 安装 Specify CLI
+### 1. 安装 `specify-cli-zh`
 
 请选择你偏好的安装方式：
 
@@ -58,20 +58,18 @@ uv tool install specify-cli-zh --from git+https://github.com/loulanyue/spec-kit-
 
 ```bash
 # 创建新项目
-specify init <PROJECT_NAME>
-# 或使用 zh 别名
 specify-zh init <PROJECT_NAME>
 
 # 或在现有项目中初始化
-specify init . --ai claude
+specify-zh init . --ai claude
 # 或者
-specify init --here --ai claude
+specify-zh init --here --ai claude
 
 # 检查本机工具环境
-specify check
+specify-zh check
 ```
 
-`specify` 是默认命令名，`specify-zh` 是等价别名，二者都可用。
+`specify-cli-zh` 默认安装的命令名是 `specify-zh`，这样可以避免与其他已安装的 `specify` 命令冲突。
 
 升级 Specify 请参阅 [升级指南](./docs/upgrade.md)。快速升级命令如下：
 
@@ -85,12 +83,12 @@ uv tool install specify-cli-zh --force --from git+https://github.com/loulanyue/s
 
 ```bash
 # 创建新项目
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <PROJECT_NAME>
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <PROJECT_NAME>
 
 # 或在现有项目中初始化
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init . --ai claude
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init . --ai claude
 # 或者
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init --here --ai claude
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init --here --ai claude
 ```
 
 **持久化安装的优势：**
@@ -187,9 +185,9 @@ uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init --here 
 | [Antigravity (agy)](https://antigravity.google/)                                     | ✅      |                                                                                                                                           |
 | Generic                                                                              | ✅      | 自定义代理接入方式。对未内置支持的代理，可通过 `--ai generic --ai-commands-dir <path>` 注入命令模板                                       |
 
-## 🔧 Specify CLI 参考
+## 🔧 specify-zh 命令参考
 
-`specify` 命令支持以下能力与参数：
+`specify-zh` 命令支持以下能力与参数：
 
 ### 命令
 
@@ -198,7 +196,7 @@ uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init --here 
 | `init`  | 使用最新模板初始化一个新的 Specify 项目 |
 | `check` | 检查本机是否安装所需工具（如 `git`、`claude`、`gemini`、`cursor-agent`、`codex`、`kiro-cli`、`qodercli`、`vibe` 等） |
 
-### `specify init` 参数与选项
+### `specify-zh init` 参数与选项
 
 | 参数/选项        | 类型     | 说明 |
 | ---------------- | -------- | ---- |
@@ -219,76 +217,76 @@ uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init --here 
 
 ```bash
 # 基础项目初始化
-specify init my-project
+specify-zh init my-project
 
 # 指定 AI 助手初始化
-specify init my-project --ai claude
+specify-zh init my-project --ai claude
 
 # 使用 Cursor 初始化
-specify init my-project --ai cursor-agent
+specify-zh init my-project --ai cursor-agent
 
 # 使用 Qoder 初始化
-specify init my-project --ai qodercli
+specify-zh init my-project --ai qodercli
 
 # 使用 Windsurf 初始化
-specify init my-project --ai windsurf
+specify-zh init my-project --ai windsurf
 
 # 使用 Kiro CLI 初始化
-specify init my-project --ai kiro-cli
+specify-zh init my-project --ai kiro-cli
 
 # 使用 Amp 初始化
-specify init my-project --ai amp
+specify-zh init my-project --ai amp
 
 # 使用 SHAI 初始化
-specify init my-project --ai shai
+specify-zh init my-project --ai shai
 
 # 使用 Mistral Vibe 初始化
-specify init my-project --ai vibe
+specify-zh init my-project --ai vibe
 
 # 使用 IBM Bob 初始化
-specify init my-project --ai bob
+specify-zh init my-project --ai bob
 
 # 使用 Antigravity 初始化
-specify init my-project --ai agy
+specify-zh init my-project --ai agy
 
 # 初始化未内置支持的代理（generic / bring your own agent）
-specify init my-project --ai generic --ai-commands-dir .myagent/commands/
+specify-zh init my-project --ai generic --ai-commands-dir .myagent/commands/
 
 # 强制使用 PowerShell 脚本
-specify init my-project --ai copilot --script ps
+specify-zh init my-project --ai copilot --script ps
 
 # 在当前目录初始化
-specify init . --ai copilot
+specify-zh init . --ai copilot
 # 或者使用 --here
-specify init --here --ai copilot
+specify-zh init --here --ai copilot
 
 # Force merge into current (non-empty) directory without confirmation
-specify init . --force --ai copilot
+specify-zh init . --force --ai copilot
 # or
-specify init --here --force --ai copilot
+specify-zh init --here --force --ai copilot
 
 # Skip git initialization
-specify init my-project --ai gemini --no-git
+specify-zh init my-project --ai gemini --no-git
 
 # Enable debug output for troubleshooting
-specify init my-project --ai claude --debug
+specify-zh init my-project --ai claude --debug
 
 # Use GitHub token for API requests (helpful for corporate environments)
-specify init my-project --ai claude --github-token ghp_your_token_here
+specify-zh init my-project --ai claude --github-token ghp_your_token_here
 
 # Install agent skills with the project
-specify init my-project --ai claude --ai-skills
+specify-zh init my-project --ai claude --ai-skills
 
 # Initialize in current directory with agent skills
-specify init --here --ai gemini --ai-skills
+specify-zh init --here --ai gemini --ai-skills
 
 # Check system requirements
-specify check
+specify-zh check
 ```
 
 ### Available Slash Commands
 
-After running `specify init`, your AI coding agent will have access to these slash commands for structured development:
+After running `specify-zh init`, your AI coding agent will have access to these slash commands for structured development:
 
 #### Core Commands
 
@@ -383,52 +381,52 @@ If you encounter issues with an agent, please open an issue so we can refine the
 <details>
 <summary>Click to expand the detailed step-by-step walkthrough</summary>
 
-You can use the Specify CLI to bootstrap your project, which will bring in the required artifacts in your environment. Run:
+You can use the `specify-cli-zh` distribution through the `specify-zh` command to bootstrap your project. Run:
 
 ```bash
-specify init <project_name>
+specify-zh init <project_name>
 ```
 
 Or initialize in the current directory:
 
 ```bash
-specify init .
+specify-zh init .
 # or use the --here flag
-specify init --here
+specify-zh init --here
 # Skip confirmation when the directory already has files
-specify init . --force
+specify-zh init . --force
 # or
-specify init --here --force
+specify-zh init --here --force
 ```
 
-![Specify CLI bootstrapping a new project in the terminal](./media/specify_cli.gif)
+![specify-zh bootstrapping a new project in the terminal](./media/specify_cli.gif)
 
 You will be prompted to select the AI agent you are using. You can also proactively specify it directly in the terminal:
 
 ```bash
-specify init <project_name> --ai claude
-specify init <project_name> --ai gemini
-specify init <project_name> --ai copilot
+specify-zh init <project_name> --ai claude
+specify-zh init <project_name> --ai gemini
+specify-zh init <project_name> --ai copilot
 
 # Or in current directory:
-specify init . --ai claude
-specify init . --ai codex
+specify-zh init . --ai claude
+specify-zh init . --ai codex
 
 # or use --here flag
-specify init --here --ai claude
-specify init --here --ai codex
+specify-zh init --here --ai claude
+specify-zh init --here --ai codex
 
 # Force merge into a non-empty current directory
-specify init . --force --ai claude
+specify-zh init . --force --ai claude
 
 # or
-specify init --here --force --ai claude
+specify-zh init --here --force --ai claude
 ```
 
-The CLI will check if you have Claude Code, Gemini CLI, Cursor CLI, Qwen CLI, opencode, Codex CLI, Qoder CLI, Tabnine CLI, Kiro CLI, or Mistral Vibe installed. If you do not, or you prefer to get the templates without checking for the right tools, use `--ignore-agent-tools` with your command:
+The `specify-zh` command will check if you have Claude Code, Gemini CLI, Cursor CLI, Qwen CLI, opencode, Codex CLI, Qoder CLI, Tabnine CLI, Kiro CLI, or Mistral Vibe installed. If you do not, or you prefer to get the templates without checking for the right tools, use `--ignore-agent-tools` with your command:
 
 ```bash
-specify init <project_name> --ai claude --ignore-agent-tools
+specify-zh init <project_name> --ai claude --ignore-agent-tools
 ```
 
 ### **STEP 1:** Establish project principles

@@ -9,15 +9,15 @@
 | 升级对象 | 命令 | 适用场景 |
 |----------|------|----------|
 | **仅 CLI 工具** | `uv tool install specify-cli-zh --force --from git+https://github.com/loulanyue/spec-kit-zh.git` | 想获得最新 CLI 功能，但不修改项目文件 |
-| **项目文件** | `specify init --here --force --ai <your-agent>` | 更新项目中的 slash commands、模板和脚本 |
+| **项目文件** | `specify-zh init --here --force --ai <your-agent>` | 更新项目中的 slash commands、模板和脚本 |
 | **两者都升** | 先升级 CLI，再更新项目 | 推荐用于大版本升级 |
 
 ---
 
 ## 第一部分：升级 CLI 工具
 
-CLI 工具（`specify`）与项目文件是分开的。升级 CLI 可以获得最新功能和 Bug 修复。
-当前分发包同时提供 `specify` 和 `specify-zh` 两个命令入口，二者行为等价。
+CLI 工具（`specify-zh`）与项目文件是分开的。升级 CLI 可以获得最新功能和 Bug 修复。
+`specify-cli-zh` 默认提供 `specify-zh` 命令入口，以避免与其他 `specify` 工具发生冲突。
 
 ### 如果你是通过 `uv tool install` 安装的
 
@@ -30,13 +30,13 @@ uv tool install specify-cli-zh --force --from git+https://github.com/loulanyue/s
 则无需手动升级，因为 `uvx` 每次都会获取最新版本。你只需要照常运行命令：
 
 ```bash
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init --here --ai copilot
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init --here --ai copilot
 ```
 
 ### 验证升级结果
 
 ```bash
-specify check
+specify-zh check
 ```
 
 这会展示已安装工具，并确认 CLI 是否可正常工作。
@@ -49,7 +49,7 @@ When Spec Kit releases new features (like new slash commands or updated template
 
 ### What gets updated?
 
-Running `specify init --here --force` will update:
+Running `specify-zh init --here --force` will update:
 
 - ✅ **Slash command files** (`.claude/commands/`, `.github/prompts/`, etc.)
 - ✅ **Script files** (`.specify/scripts/`)
@@ -72,7 +72,7 @@ The `specs/` directory is completely excluded from template packages and will ne
 Run this inside your project directory:
 
 ```bash
-specify init --here --force --ai <your-agent>
+specify-zh init --here --force --ai <your-agent>
 ```
 
 Replace `<your-agent>` with your AI assistant. Refer to this list of [Supported AI Agents](../README.md#-supported-ai-agents)
@@ -80,7 +80,7 @@ Replace `<your-agent>` with your AI assistant. Refer to this list of [Supported 
 **Example:**
 
 ```bash
-specify init --here --force --ai copilot
+specify-zh init --here --force --ai copilot
 ```
 
 ### Understanding the `--force` flag
@@ -103,7 +103,7 @@ With `--force`, it skips the confirmation and proceeds immediately.
 
 ### 1. Constitution file will be overwritten
 
-**Known issue:** `specify init --here --force` currently overwrites `.specify/memory/constitution.md` with the default template, erasing any customizations you made.
+**Known issue:** `specify-zh init --here --force` currently overwrites `.specify/memory/constitution.md` with the default template, erasing any customizations you made.
 
 **Workaround:**
 
@@ -112,7 +112,7 @@ With `--force`, it skips the confirmation and proceeds immediately.
 cp .specify/memory/constitution.md .specify/memory/constitution-backup.md
 
 # 2. Run the upgrade
-specify init --here --force --ai copilot
+specify-zh init --here --force --ai copilot
 
 # 3. Restore your customized constitution
 mv .specify/memory/constitution-backup.md .specify/memory/constitution.md
@@ -169,7 +169,7 @@ Restart your IDE to refresh the command list.
 uv tool install specify-cli-zh --force --from git+https://github.com/loulanyue/spec-kit-zh.git
 
 # Update project files to get new commands
-specify init --here --force --ai copilot
+specify-zh init --here --force --ai copilot
 
 # Restore your constitution if customized
 git restore .specify/memory/constitution.md
@@ -186,7 +186,7 @@ cp -r .specify/templates /tmp/templates-backup
 uv tool install specify-cli-zh --force --from git+https://github.com/loulanyue/spec-kit-zh.git
 
 # 3. Update project
-specify init --here --force --ai copilot
+specify-zh init --here --force --ai copilot
 
 # 4. Restore customizations
 mv /tmp/constitution-backup.md .specify/memory/constitution.md
@@ -219,7 +219,7 @@ If you initialized your project with `--no-git`, you can still upgrade:
 cp .specify/memory/constitution.md /tmp/constitution-backup.md
 
 # Run upgrade
-specify init --here --force --ai copilot --no-git
+specify-zh init --here --force --ai copilot --no-git
 
 # Restore customizations
 mv /tmp/constitution-backup.md .specify/memory/constitution.md
@@ -240,13 +240,13 @@ The `--no-git` flag tells Spec Kit to **skip git repository initialization**. Th
 **During initial setup:**
 
 ```bash
-specify init my-project --ai copilot --no-git
+specify-zh init my-project --ai copilot --no-git
 ```
 
 **During upgrade:**
 
 ```bash
-specify init --here --force --ai copilot --no-git
+specify-zh init --here --force --ai copilot --no-git
 ```
 
 ### What `--no-git` does NOT do
@@ -324,7 +324,7 @@ Do you want to continue? [y/N]
 
 **What this means:**
 
-This warning appears when you run `specify init --here` (or `specify init .`) in a directory that already has files. It's telling you:
+This warning appears when you run `specify-zh init --here` (or `specify-zh init .`) in a directory that already has files. It's telling you:
 
 1. **The directory has existing content** - In the example, 25 files/folders
 2. **Files will be merged** - New template files will be added alongside your existing files
@@ -353,7 +353,7 @@ Only Spec Kit infrastructure files:
 - **Use `--force` flag** - Skip this confirmation entirely:
 
   ```bash
-  specify init --here --force --ai copilot
+  specify-zh init --here --force --ai copilot
   ```
 
 **When you see this warning:**
@@ -375,7 +375,7 @@ uv tool list
 # Should show specify-cli-zh
 
 # Verify path
-which specify
+which specify-zh
 
 # Should point to the uv tool installation directory
 ```
@@ -387,19 +387,19 @@ uv tool uninstall specify-cli-zh
 uv tool install specify-cli-zh --from git+https://github.com/loulanyue/spec-kit-zh.git
 ```
 
-### "Do I need to run specify every time I open my project?"
+### "Do I need to run specify-zh every time I open my project?"
 
-**Short answer:** No, you only run `specify init` once per project (or when upgrading).
+**Short answer:** No, you only run `specify-zh init` once per project (or when upgrading).
 
 **Explanation:**
 
-The `specify` CLI tool is used for:
+The `specify-zh` CLI tool is used for:
 
-- **Initial setup:** `specify init` to bootstrap Spec Kit in your project
-- **Upgrades:** `specify init --here --force` to update templates and commands
-- **Diagnostics:** `specify check` to verify tool installation
+- **Initial setup:** `specify-zh init` to bootstrap Spec Kit in your project
+- **Upgrades:** `specify-zh init --here --force` to update templates and commands
+- **Diagnostics:** `specify-zh check` to verify tool installation
 
-Once you've run `specify init`, the slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) are **permanently installed** in your project's agent folder (`.claude/`, `.github/prompts/`, etc.). Your AI assistant reads these command files directly—no need to run `specify` again.
+Once you've run `specify-zh init`, the slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) are **permanently installed** in your project's agent folder (`.claude/`, `.github/prompts/`, etc.). Your AI assistant reads these command files directly—no need to run `specify-zh` again.
 
 **If your agent isn't recognizing slash commands:**
 
@@ -415,11 +415,11 @@ Once you've run `specify init`, the slash commands (like `/speckit.specify`, `/s
 
 2. **Restart your IDE/editor completely** (not just reload window)
 
-3. **Check you're in the correct directory** where you ran `specify init`
+3. **Check you're in the correct directory** where you ran `specify-zh init`
 
 4. **For some agents**, you may need to reload the workspace or clear cache
 
-**Related issue:** If Copilot can't open local files or uses PowerShell commands unexpectedly, this is typically an IDE context issue, not related to `specify`. Try:
+**Related issue:** If Copilot can't open local files or uses PowerShell commands unexpectedly, this is typically an IDE context issue, not related to `specify-zh`. Try:
 
 - Restarting VS Code
 - Checking file permissions

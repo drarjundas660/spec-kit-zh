@@ -3,30 +3,30 @@
 本指南将帮助你使用 Spec Kit 快速上手规范驱动开发。
 
 > [!NOTE]
-> 所有自动化脚本现在都同时提供 Bash（`.sh`）和 PowerShell（`.ps1`）版本。除非显式传入 `--script sh|ps`，否则 `specify` CLI 会根据操作系统自动选择。
+> 所有自动化脚本现在都同时提供 Bash（`.sh`）和 PowerShell（`.ps1`）版本。除非显式传入 `--script sh|ps`，否则 `specify-zh` CLI 会根据操作系统自动选择。
 
 ## 六步流程
 
 > [!TIP]
 > **上下文感知**：Spec Kit 命令会根据当前 Git 分支（例如 `001-feature-name`）自动识别当前活跃功能。要切换到其他规范，只需要切换 Git 分支即可。
 
-### 第 1 步：安装 Specify
+### 第 1 步：安装 `specify-cli-zh`
 
-在终端中运行 `specify` CLI 命令来初始化项目：
+安装 `specify-cli-zh` 后，在终端中使用 `specify-zh` 命令初始化项目：
 
 ```bash
 # 创建新项目目录
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <PROJECT_NAME>
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <PROJECT_NAME>
 
 # 或者直接在当前目录初始化
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init .
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init .
 ```
 
 如有需要，也可以显式指定脚本类型：
 
 ```bash
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <PROJECT_NAME> --script ps  # Force PowerShell
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <PROJECT_NAME> --script sh  # Force POSIX shell
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <PROJECT_NAME> --script ps  # Force PowerShell
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <PROJECT_NAME> --script sh  # Force POSIX shell
 ```
 
 ### 第 2 步：定义项目章程

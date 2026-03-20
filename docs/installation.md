@@ -15,28 +15,28 @@
 最简单的开始方式是先初始化一个新项目：
 
 ```bash
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <PROJECT_NAME>
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <PROJECT_NAME>
 ```
 
 也可以直接在当前目录初始化：
 
 ```bash
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init .
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init .
 # or use the --here flag
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init --here
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init --here
 ```
 
-如果你通过 `uv tool install specify-cli-zh --from git+https://github.com/loulanyue/spec-kit-zh.git` 持久化安装，则既可以使用 `specify`，也可以使用 `specify-zh`。
+如果你通过 `uv tool install specify-cli-zh --from git+https://github.com/loulanyue/spec-kit-zh.git` 持久化安装，默认命令名是 `specify-zh`。
 
 ### 指定 AI Agent
 
 你可以在初始化时主动指定要使用的 AI Agent：
 
 ```bash
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <project_name> --ai claude
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <project_name> --ai gemini
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <project_name> --ai copilot
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <project_name> --ai codebuddy
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <project_name> --ai claude
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <project_name> --ai gemini
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <project_name> --ai copilot
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <project_name> --ai codebuddy
 ```
 
 ### 指定脚本类型（Shell 或 PowerShell）
@@ -52,8 +52,8 @@ uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <projec
 如需强制指定脚本类型：
 
 ```bash
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <project_name> --script sh
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <project_name> --script ps
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <project_name> --script sh
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <project_name> --script ps
 ```
 
 ### 跳过 Agent 工具检查
@@ -61,7 +61,7 @@ uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <projec
 如果你希望直接获取模板，而不检查本机是否已安装对应工具：
 
 ```bash
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <project_name> --ai claude --ignore-agent-tools
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <project_name> --ai claude --ignore-agent-tools
 ```
 
 ## 验证

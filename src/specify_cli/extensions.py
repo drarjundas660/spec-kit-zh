@@ -346,7 +346,7 @@ class ExtensionManager:
         if self.registry.is_installed(manifest.id):
             raise ExtensionError(
                 f"扩展 '{manifest.id}' 已安装。"
-                f"请先执行 'specify extension remove {manifest.id}'。"
+                f"请先执行 'specify-zh extension remove {manifest.id}'。"
             )
 
         # Install extension

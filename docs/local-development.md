@@ -1,6 +1,6 @@
 # 本地开发指南
 
-本指南介绍如何在本地迭代 `specify` CLI，而无需先发布版本或合并到 `main`。
+本指南介绍如何在本地迭代 `specify-zh` CLI，而无需先发布版本或合并到 `main`。
 
 > 脚本现在同时提供 Bash（`.sh`）和 PowerShell（`.ps1`）版本。除非显式传入 `--script sh|ps`，否则 CLI 会根据操作系统自动选择。
 
@@ -41,8 +41,8 @@ source .venv/bin/activate  # or on Windows PowerShell: .venv\Scripts\Activate.ps
 # 以 editable 模式安装项目
 uv pip install -e .
 
-# 现在可以直接使用 'specify' 入口命令
-specify --help
+# 现在可以直接使用 'specify-zh' 入口命令
+specify-zh --help
 ```
 
 由于采用 editable 模式，修改代码后无需重新安装。
@@ -52,7 +52,7 @@ specify --help
 `uvx` 可以直接从本地路径（或 Git 引用）运行，用来模拟真实用户流程：
 
 ```bash
-uvx --from . specify init demo-uvx --ai copilot --ignore-agent-tools --script sh
+uvx --from . specify-zh init demo-uvx --ai copilot --ignore-agent-tools --script sh
 ```
 
 你也可以让 uvx 指向某个特定分支，而无需先合并：
@@ -60,7 +60,7 @@ uvx --from . specify init demo-uvx --ai copilot --ignore-agent-tools --script sh
 ```bash
 # 先把当前工作分支推送上去
 git push origin your-feature-branch
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git@your-feature-branch specify init demo-branch-test --script ps
+uvx --from git+https://github.com/loulanyue/spec-kit-zh.git@your-feature-branch specify-zh init demo-branch-test --script ps
 ```
 
 ### 4a. 使用绝对路径调用 uvx（可从任意目录运行）
@@ -68,21 +68,21 @@ uvx --from git+https://github.com/loulanyue/spec-kit-zh.git@your-feature-branch 
 如果你位于其他目录，请使用绝对路径替代 `.`：
 
 ```bash
-uvx --from /mnt/c/GitHub/spec-kit specify --help
-uvx --from /mnt/c/GitHub/spec-kit specify init demo-anywhere --ai copilot --ignore-agent-tools --script sh
+uvx --from /mnt/c/GitHub/spec-kit specify-zh --help
+uvx --from /mnt/c/GitHub/spec-kit specify-zh init demo-anywhere --ai copilot --ignore-agent-tools --script sh
 ```
 
 也可以设置环境变量，方便重复使用：
 
 ```bash
 export SPEC_KIT_SRC=/mnt/c/GitHub/spec-kit
-uvx --from "$SPEC_KIT_SRC" specify init demo-env --ai copilot --ignore-agent-tools --script ps
+uvx --from "$SPEC_KIT_SRC" specify-zh init demo-env --ai copilot --ignore-agent-tools --script ps
 ```
 
 （可选）定义一个 shell 函数：
 
 ```bash
-specify-dev() { uvx --from /mnt/c/GitHub/spec-kit specify "$@"; }
+specify-dev() { uvx --from /mnt/c/GitHub/spec-kit specify-zh "$@"; }
 # Then
 specify-dev --help
 ```
@@ -133,8 +133,8 @@ python -m src.specify_cli init --here --ai claude --ignore-agent-tools --script 
 如果你在本地实验时需要跳过 TLS 校验：
 
 ```bash
-specify check --skip-tls
-specify init demo --skip-tls --ai gemini --ignore-agent-tools --script ps
+specify-zh check --skip-tls
+specify-zh init demo --skip-tls --ai gemini --ignore-agent-tools --script ps
 ```
 
 （仅建议用于本地实验。）
@@ -144,10 +144,10 @@ specify init demo --skip-tls --ai gemini --ignore-agent-tools --script ps
 | 操作 | 命令 |
 |------|------|
 | 直接运行 CLI | `python -m src.specify_cli --help` |
-| Editable install | `uv pip install -e .` 然后 `specify ...` |
-| 本地 uvx 运行（仓库根目录） | `uvx --from . specify ...` |
-| 本地 uvx 运行（绝对路径） | `uvx --from /mnt/c/GitHub/spec-kit specify ...` |
-| Git 分支 uvx | `uvx --from git+URL@branch specify ...` |
+| Editable install | `uv pip install -e .` 然后 `specify-zh ...` |
+| 本地 uvx 运行（仓库根目录） | `uvx --from . specify-zh ...` |
+| 本地 uvx 运行（绝对路径） | `uvx --from /mnt/c/GitHub/spec-kit specify-zh ...` |
+| Git 分支 uvx | `uvx --from git+URL@branch specify-zh ...` |
 | 构建 wheel | `uv build` |
 
 ## 11. 清理

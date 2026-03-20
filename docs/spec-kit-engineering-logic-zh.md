@@ -21,14 +21,14 @@
 
 ```toml
 [project.scripts]
-specify = "specify_cli:main"
+specify-zh = "specify_cli:main"
 ```
 
 这意味着用户安装后实际使用的是：
 
 ```bash
-specify init ...
-specify check
+specify-zh init ...
+specify-zh check
 ```
 
 CLI 是工程编排器，负责：
@@ -118,13 +118,13 @@ CLI 是工程编排器，负责：
 
 ## 4. CLI 的工作逻辑
 
-### 4.1 `specify-cli-zh` 是分发包，`specify` 是初始化命令，不是完整工作流执行器
+### 4.1 `specify-cli-zh` 是分发包，`specify-zh` 是初始化命令，不是完整工作流执行器
 
 CLI 的职责主要在“初始化工程”和“准备 agent 环境”，而不是直接完成所有文档生成。
 
 从 `README.md` 与代码可以看出，CLI 的核心命令主要是：
-- `specify init`
-- `specify check`
+- `specify-zh init`
+- `specify-zh check`
 
 其中：
 - `init` 负责把 `spec-kit` 模板和 agent 命令落到目标项目里
@@ -166,9 +166,9 @@ CLI 的职责主要在“初始化工程”和“准备 agent 环境”，而不
 
 ## 5. 项目初始化逻辑
 
-### 5.1 `specify init` 的本质
+### 5.1 `specify-zh init` 的本质
 
-`specify init` 的本质是把一套通用 SDD 工程骨架注入目标仓库。它通常会做这些事：
+`specify-zh init` 的本质是把一套通用 SDD 工程骨架注入目标仓库。它通常会做这些事：
 - 选择脚本类型（sh 或 ps）
 - 选择 AI agent
 - 创建 `.specify/` 目录与模板
@@ -538,7 +538,7 @@ specs/
 
 假设用户在一个新项目中使用 `spec-kit`，大致会发生下面这些事：
 
-1. 执行 `specify init my-project --ai claude`
+1. 执行 `specify-zh init my-project --ai claude`
 2. CLI 把 `.specify/` 模板和 `.claude/commands/` 命令落到项目中
 3. 用户在 agent 里运行 `/speckit.constitution`
 4. 用户运行 `/speckit.specify "我要做一个照片管理应用"`

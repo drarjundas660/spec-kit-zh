@@ -13,6 +13,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `MINOR`: backward-compatible new features, new commands, new agent support, or meaningful workflow capabilities added to the current release line.
 - `MAJOR`: breaking changes to CLI behavior, generated project structure, template contracts, or extension/catalog behavior that require user migration.
 
+## [0.4.0] - 2026-03-20
+
+### Changed
+
+- Changed the `specify-cli-zh` distribution to install only the `specify-zh` executable by default, avoiding collisions with existing `specify` commands from upstream or other local tools.
+- Updated installation and upgrade guidance to use `specify-zh` as the canonical command for the zh distribution.
+
+### Notes
+
+- This change is intended to fix `uv tool install specify-cli-zh ...` failures caused by `Executable already exists: specify`.
+
 ## [0.3.0] - 2026-03-20
 
 ### Added

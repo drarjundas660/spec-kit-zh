@@ -13,16 +13,15 @@
 Specify CLI - 规范驱动开发项目设置工具
 
 Usage:
-    uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init <project-name>
-    uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init .
-    uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify init --here
+    uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <project-name>
+    uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init .
+    uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init --here
 
 Or install globally:
     uv tool install specify-cli-zh --from git+https://github.com/loulanyue/spec-kit-zh.git
-    specify init <project-name>
     specify-zh init <project-name>
-    specify init .
-    specify init --here
+    specify-zh init .
+    specify-zh init --here
 """
 
 import os
@@ -515,7 +514,7 @@ class BannerGroup(TyperGroup):
 
 
 app = typer.Typer(
-    name="specify",
+    name="specify-zh",
     help="Spec Kit 规范驱动开发项目设置工具",
     add_completion=False,
     invoke_without_command=True,
@@ -563,7 +562,7 @@ def callback(ctx: typer.Context):
     """Show banner when no subcommand is provided."""
     if ctx.invoked_subcommand is None and "--help" not in sys.argv and "-h" not in sys.argv:
         show_banner()
-        console.print(Align.center("[dim]运行 'specify --help' 查看使用说明[/dim]"))
+        console.print(Align.center("[dim]运行 'specify-zh --help' 查看使用说明[/dim]"))
         console.print()
 
 def run_command(cmd: list[str], check_return: bool = True, capture: bool = False, shell: bool = False) -> Optional[str]:
@@ -644,7 +643,7 @@ def is_git_repo(path: Path = None) -> bool:
 def _doctor_install_hint(tool: str) -> str:
     """Return a short install hint for a missing tool."""
     fixed_hints = {
-        "git": "请先安装 Git，然后重新运行 `specify doctor` 或 `specify check`。",
+        "git": "请先安装 Git，然后重新运行 `specify-zh doctor` 或 `specify-zh check`。",
         "uv": "建议安装 uv：`pip install uv`，或参考 https://docs.astral.sh/uv/ 。",
         "code": "如需使用 VS Code，可安装 Visual Studio Code 后重试。",
         "code-insiders": "如需使用 VS Code Insiders，可安装后重试。",
@@ -737,7 +736,7 @@ def _build_doctor_recommendations(diagnostics: dict) -> list[str]:
 
     if not diagnostics["is_spec_project"]:
         recommendations.append(
-            "当前目录尚未初始化为 spec-kit 项目。可运行 `specify init --here --ai claude` 开始。"
+            "当前目录尚未初始化为 spec-kit 项目。可运行 `specify-zh init --here --ai claude` 开始。"
         )
     elif not diagnostics["is_git_repo"]:
         recommendations.append(
@@ -753,7 +752,7 @@ def _build_doctor_recommendations(diagnostics: dict) -> list[str]:
         )
 
     if not recommendations:
-        recommendations.append("当前环境状态良好，可以直接开始使用 `specify init` 或项目内 slash commands。")
+        recommendations.append("当前环境状态良好，可以直接开始使用 `specify-zh init` 或项目内 slash commands。")
 
     return recommendations
 
@@ -1447,21 +1446,21 @@ def init(
     6. 可选地安装 agent skills
 
     示例：
-        specify init my-project
-        specify init my-project --ai claude
-        specify init my-project --ai copilot --no-git
-        specify init --ignore-agent-tools my-project
-        specify init . --ai claude         # Initialize in current directory
-        specify init .                     # Initialize in current directory (interactive AI selection)
-        specify init --here --ai claude    # Alternative syntax for current directory
-        specify init --here --ai codex
-        specify init --here --ai codebuddy
-        specify init --here --ai vibe      # Initialize with Mistral Vibe support
-        specify init --here
-        specify init --here --force  # Skip confirmation when current directory not empty
-        specify init my-project --ai claude --ai-skills   # Install agent skills
-        specify init --here --ai gemini --ai-skills
-        specify init my-project --ai generic --ai-commands-dir .myagent/commands/  # 自定义 agent
+        specify-zh init my-project
+        specify-zh init my-project --ai claude
+        specify-zh init my-project --ai copilot --no-git
+        specify-zh init --ignore-agent-tools my-project
+        specify-zh init . --ai claude         # Initialize in current directory
+        specify-zh init .                     # Initialize in current directory (interactive AI selection)
+        specify-zh init --here --ai claude    # Alternative syntax for current directory
+        specify-zh init --here --ai codex
+        specify-zh init --here --ai codebuddy
+        specify-zh init --here --ai vibe      # Initialize with Mistral Vibe support
+        specify-zh init --here
+        specify-zh init --here --force  # Skip confirmation when current directory not empty
+        specify-zh init my-project --ai claude --ai-skills   # Install agent skills
+        specify-zh init --here --ai gemini --ai-skills
+        specify-zh init my-project --ai generic --ai-commands-dir .myagent/commands/  # 自定义 agent
     """
 
     show_banner()
@@ -1470,14 +1469,14 @@ def init(
     if ai_assistant and ai_assistant.startswith("--"):
         console.print(f"[red]Error:[/red] Invalid value for --ai: '{ai_assistant}'")
         console.print("[yellow]提示：[/yellow] 你可能忘了给 --ai 提供取值。")
-        console.print("[yellow]示例：[/yellow] specify init --ai claude --here")
+        console.print("[yellow]示例：[/yellow] specify-zh init --ai claude --here")
         console.print(f"[yellow]可用 agents：[/yellow] {', '.join(AGENT_CONFIG.keys())}")
         raise typer.Exit(1)
     
     if ai_commands_dir and ai_commands_dir.startswith("--"):
         console.print(f"[red]Error:[/red] Invalid value for --ai-commands-dir: '{ai_commands_dir}'")
         console.print("[yellow]提示：[/yellow] 你可能忘了给 --ai-commands-dir 提供取值。")
-        console.print("[yellow]示例：[/yellow] specify init --ai generic --ai-commands-dir .myagent/commands/")
+        console.print("[yellow]示例：[/yellow] specify-zh init --ai generic --ai-commands-dir .myagent/commands/")
         raise typer.Exit(1)
 
     if ai_assistant:
@@ -1497,7 +1496,7 @@ def init(
 
     if ai_skills and not ai_assistant:
         console.print("[red]错误：[/red] --ai-skills 必须搭配 --ai 使用")
-        console.print("[yellow]Usage:[/yellow] specify init <project> --ai <agent> --ai-skills")
+        console.print("[yellow]Usage:[/yellow] specify-zh init <project> --ai <agent> --ai-skills")
         raise typer.Exit(1)
 
     if here:
@@ -1567,7 +1566,7 @@ def init(
     if selected_ai == "generic":
         if not ai_commands_dir:
             console.print("[red]错误：[/red] 使用 --ai generic 时必须提供 --ai-commands-dir")
-            console.print("[dim]Example: specify init my-project --ai generic --ai-commands-dir .myagent/commands/[/dim]")
+            console.print("[dim]Example: specify-zh init my-project --ai generic --ai-commands-dir .myagent/commands/[/dim]")
             raise typer.Exit(1)
     elif ai_commands_dir:
         console.print(f"[red]Error:[/red] --ai-commands-dir can only be used with --ai generic (not '{selected_ai}')")
@@ -1942,8 +1941,8 @@ def doctor():
         ]
     else:
         follow_up = [
-            "1. 运行 `specify init --here --ai claude` 在当前目录初始化",
-            "2. 或运行 `specify init <项目名> --ai claude` 创建新项目",
+            "1. 运行 `specify-zh init --here --ai claude` 在当前目录初始化",
+            "2. 或运行 `specify-zh init <项目名> --ai claude` 创建新项目",
             "3. 初始化完成后，再进入 slash commands 工作流",
         ]
 
@@ -2068,7 +2067,7 @@ def extension_list(
     if not installed and not (available or all_extensions):
         console.print("[yellow]当前没有安装任何扩展。[/yellow]")
         console.print("\n可使用以下命令安装扩展：")
-        console.print("  specify extension add <extension-name>")
+        console.print("  specify-zh extension add <extension-name>")
         return
 
     if installed:
@@ -2085,7 +2084,7 @@ def extension_list(
 
     if available or all_extensions:
         console.print("\n安装扩展：")
-        console.print("  [cyan]specify extension add <name>[/cyan]")
+        console.print("  [cyan]specify-zh extension add <name>[/cyan]")
 
 
 @catalog_app.command("list")
@@ -2199,7 +2198,7 @@ def catalog_add(
     for existing in catalogs:
         if isinstance(existing, dict) and existing.get("name") == name:
             console.print(f"[yellow]警告：[/yellow] 已存在名为 '{name}' 的目录。")
-            console.print("请先使用 'specify extension catalog remove' 删除，或换一个名称。")
+            console.print("请先使用 'specify-zh extension catalog remove' 删除，或换一个名称。")
             raise typer.Exit(1)
 
     catalogs.append({
@@ -2454,7 +2453,7 @@ def extension_remove(
             console.print(f"\n配置文件已保留在 .specify/extensions/{extension}/")
         else:
             console.print(f"\n配置文件已备份到 .specify/extensions/.backup/{extension}/")
-        console.print(f"\n重新安装：specify extension add {extension}")
+        console.print(f"\n重新安装：specify-zh extension add {extension}")
     else:
         console.print("[red]错误：[/red] 扩展移除失败")
         raise typer.Exit(1)
@@ -2532,12 +2531,12 @@ def extension_search(
 
             # Install command (show warning if not installable)
             if install_allowed:
-                console.print(f"\n  [cyan]安装：[/cyan] specify extension add {ext['id']}")
+                console.print(f"\n  [cyan]安装：[/cyan] specify-zh extension add {ext['id']}")
             else:
                 console.print(f"\n  [yellow]⚠[/yellow]  当前不能直接从 '{catalog_name}' 安装。")
                 console.print(
                     f"  可将其加入 install_allowed: true 的已批准目录，"
-                    f"或通过 ZIP URL 安装：specify extension add {ext['id']} --from <zip-url>"
+                    f"或通过 ZIP URL 安装：specify-zh extension add {ext['id']} --from <zip-url>"
                 )
             console.print()
 
@@ -2655,7 +2654,7 @@ def extension_info(
             console.print(f"\nTo remove: specify extension remove {ext_info['id']}")
         elif install_allowed:
             console.print("[yellow]Not installed[/yellow]")
-            console.print(f"\n[cyan]Install:[/cyan] specify extension add {ext_info['id']}")
+            console.print(f"\n[cyan]Install:[/cyan] specify-zh extension add {ext_info['id']}")
         else:
             catalog_name = ext_info.get("_catalog_name", "community")
             console.print("[yellow]Not installed[/yellow]")
@@ -2766,7 +2765,7 @@ def extension_update(
                 "Please update manually:"
             )
             console.print(f"  specify extension remove {ext_id} --keep-config")
-            console.print(f"  specify extension add {ext_id}")
+            console.print(f"  specify-zh extension add {ext_id}")
 
         console.print(
             "\n[cyan]Tip:[/cyan] Automatic updates will be available in a future version"
