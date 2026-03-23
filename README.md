@@ -18,27 +18,29 @@
 
 ## 目录
 
-- [🤔 什么是规范驱动开发？](#-什么是规范驱动开发)
-- [⚡ 快速开始](#-快速开始)
-- [📽️ 视频概览](#️-视频概览)
-- [🚶 社区演练项目](#-社区演练项目)
-- [🤖 支持的 AI 代理](#-支持的-ai-代理)
-- [🔧 specify-zh 命令参考](#-specify-zh-命令参考)
-- [📚 核心理念](#-核心理念)
-- [🌟 开发阶段](#-开发阶段)
-- [🎯 实验目标](#-实验目标)
-- [🔧 前置要求](#-前置要求)
-- [📖 延伸阅读](#-延伸阅读)
-- [📋 详细流程](#-详细流程)
-- [🔍 故障排除](#-故障排除)
-- [💬 支持](#-支持)
-- [🙏 致谢](#-致谢)
-- [📄 许可证](#-许可证)
+- [🤔 什么是规范驱动开发？](#what-is-sdd)
+- [⚡ 快速开始](#quickstart)
+- [📽️ 视频概览](#video-overview)
+- [🚶 社区演练项目](#community-walkthroughs)
+- [🤖 支持的 AI 代理](#supported-ai-agents)
+- [🔧 specify-zh 命令参考](#specify-zh-cli-reference)
+- [📚 核心理念](#core-philosophy)
+- [🌟 开发阶段](#development-phases)
+- [🎯 实验目标](#experimental-goals)
+- [🔧 前置要求](#prerequisites)
+- [📖 延伸阅读](#learn-more)
+- [📋 详细流程](#detailed-process)
+- [🔍 故障排除](#troubleshooting)
+- [💬 支持](#support)
+- [🙏 致谢](#acknowledgements)
+- [📄 许可证](#license)
 
+<a id="what-is-sdd"></a>
 ## 🤔 什么是规范驱动开发？
 
 规范驱动开发（Spec-Driven Development）**重新定义**了软件开发的起点。过去几十年里，代码一直是开发过程中的主角，而规范常常只是编码开始前临时搭起来的脚手架。规范驱动开发改变了这一点：**规范本身变得可执行**，它不再只是指导实现，而是可以直接驱动计划、任务拆解与最终实现。
 
+<a id="quickstart"></a>
 ## ⚡ 快速开始
 
 ### 1. 安装 `specify-cli-zh`
@@ -141,12 +143,14 @@ uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init --he
 
 如需查看完整分步说明，请阅读 [Spec-Driven Development 全流程指南](./spec-driven.md)。
 
+<a id="video-overview"></a>
 ## 📽️ 视频概览
 
 想快速了解 Spec Kit 的工作方式？可以先看这个[视频概览](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)：
 
 [![Spec Kit video header](/media/spec-kit-video-header.jpg)](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)
 
+<a id="community-walkthroughs"></a>
 ## 🚶 社区演练项目
 
 下面这些社区项目展示了规范驱动开发在不同场景中的实际用法：
@@ -157,6 +161,7 @@ uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init --he
 
 - **[Brownfield ASP.NET CMS extension](https://github.com/mnriem/spec-kit-aspnet-brownfield-demo)**：在已有 ASP.NET CMS 项目中追加两个功能，展示 spec-kit 如何适配已有代码库，而不要求项目一开始就有现成规范或 constitution。
 
+<a id="supported-ai-agents"></a>
 ## 🤖 支持的 AI 代理
 
 | 代理                                                                                 | 支持情况 | 说明                                                                                                                                        |
@@ -184,6 +189,7 @@ uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init --he
 | [Antigravity (agy)](https://antigravity.google/)                                     | ✅      |                                                                                                                                           |
 | Generic                                                                              | ✅      | 自定义代理接入方式。对未内置支持的代理，可通过 `--ai generic --ai-commands-dir <path>` 注入命令模板                                       |
 
+<a id="specify-zh-cli-reference"></a>
 ## 🔧 specify-zh 命令参考
 
 `specify-zh` 命令支持以下能力与参数：
@@ -315,6 +321,7 @@ Additional commands for enhanced quality and validation:
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-photo-albums`) to work on a specific feature when not using Git branches.<br/>\*\*Must be set in the context of the agent you're working with prior to using `/speckit.plan` or follow-up commands. |
 
+<a id="core-philosophy"></a>
 ## 📚 Core Philosophy
 
 Spec-Driven Development is a structured process that emphasizes:
@@ -324,6 +331,7 @@ Spec-Driven Development is a structured process that emphasizes:
 - **Multi-step refinement** rather than one-shot code generation from prompts
 - **Heavy reliance** on advanced AI model capabilities for specification interpretation
 
+<a id="development-phases"></a>
 ## 🌟 Development Phases
 
 | Phase                                    | Focus                    | Key Activities                                                                                                                                                     |
@@ -332,6 +340,7 @@ Spec-Driven Development is a structured process that emphasizes:
 | **Creative Exploration**                 | Parallel implementations | <ul><li>Explore diverse solutions</li><li>Support multiple technology stacks & architectures</li><li>Experiment with UX patterns</li></ul>                         |
 | **Iterative Enhancement** ("Brownfield") | Brownfield modernization | <ul><li>Add features iteratively</li><li>Modernize legacy systems</li><li>Adapt processes</li></ul>                                                                |
 
+<a id="experimental-goals"></a>
 ## 🎯 Experimental Goals
 
 Our research and experimentation focus on:
@@ -358,23 +367,26 @@ Our research and experimentation focus on:
 - Provide robust iterative feature development workflows
 - Extend processes to handle upgrades and modernization tasks
 
+<a id="prerequisites"></a>
 ## 🔧 Prerequisites
 
 - **Linux/macOS/Windows**
-- [Supported](#-supported-ai-agents) AI coding agent.
+- [Supported](#supported-ai-agents) AI coding agent.
 - [uv](https://docs.astral.sh/uv/) for package management
 - [Python 3.11+](https://www.python.org/downloads/)
 - [Git](https://git-scm.com/downloads)
 
 If you encounter issues with an agent, please open an issue so we can refine the integration.
 
+<a id="learn-more"></a>
 ## 📖 Learn More
 
 - **[Complete Spec-Driven Development Methodology](./spec-driven.md)** - Deep dive into the full process
-- **[Detailed Walkthrough](#-detailed-process)** - Step-by-step implementation guide
+- **[Detailed Walkthrough](#detailed-process)** - Step-by-step implementation guide
 
 ---
 
+<a id="detailed-process"></a>
 ## 📋 Detailed Process
 
 <details>
@@ -658,6 +670,7 @@ Once the implementation is complete, test the application and resolve any runtim
 
 ---
 
+<a id="troubleshooting"></a>
 ## 🔍 Troubleshooting
 
 ### Git Credential Manager on Linux
@@ -677,14 +690,17 @@ echo "Cleaning up..."
 rm gcm-linux_amd64.2.6.1.deb
 ```
 
+<a id="support"></a>
 ## 💬 Support
 
 For support, please open a [GitHub issue](https://github.com/loulanyue/spec-kit-zh/issues/new). We welcome bug reports, feature requests, and questions about using Spec-Driven Development.
 
+<a id="acknowledgements"></a>
 ## 🙏 Acknowledgements
 
 This project is heavily influenced by and based on the work and research of [John Lam](https://github.com/jflam).
 
+<a id="license"></a>
 ## 📄 License
 
 This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) file for the full terms.
