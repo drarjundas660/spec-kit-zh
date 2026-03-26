@@ -1,6 +1,6 @@
 [project]
 name = "specify-cli-zh"
-version = "0.5.0"
+version = "0.6.0"
 description = "Specify CLI，GitHub Spec Kit 的命令行工具，用于为 Spec-Driven Development (SDD) 初始化项目。"
 requires-python = ">=3.11"
 dependencies = [
@@ -24,6 +24,14 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/specify_cli"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"docs/conventions.yml" = "specify_cli/_bundled_docs/conventions.yml"
+"docs/axios-response-convention.md" = "specify_cli/_bundled_docs/axios-response-convention.md"
+"docs/db-and-mapper-convention.md" = "specify_cli/_bundled_docs/db-and-mapper-convention.md"
+"docs/ecp-platform-convention.md" = "specify_cli/_bundled_docs/ecp-platform-convention.md"
+"docs/antd-searchbar-layout-convention.md" = "specify_cli/_bundled_docs/antd-searchbar-layout-convention.md"
+"docs/antd-pagination-convention.md" = "specify_cli/_bundled_docs/antd-pagination-convention.md"
 
 [project.optional-dependencies]
 test = [

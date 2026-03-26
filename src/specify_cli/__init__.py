@@ -65,6 +65,8 @@ except ModuleNotFoundError:
 
 ssl_context = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
 client = httpx.Client(verify=ssl_context)
+BUNDLED_DOCS_DIR = Path(__file__).resolve().parent / "_bundled_docs"
+CONVENTIONS_DIRNAME = "conventions"
 
 def _github_token(cli_token: str | None = None) -> str | None:
     """Return sanitized GitHub token (cli arg takes precedence) or None."""
@@ -1237,6 +1239,134 @@ def ensure_constitution_from_template(project_path: Path, tracker: StepTracker |
         else:
             console.print(f"[yellow]警告：无法初始化章程：{e}[/yellow]")
 
+
+def _get_conventions_registry_path() -> Path | None:
+    """Return the best available conventions registry path."""
+    bundled_registry = BUNDLED_DOCS_DIR / "conventions.yml"
+    if bundled_registry.exists():
+        return bundled_registry
+
+    repo_registry = Path(__file__).resolve().parents[2] / "docs" / "conventions.yml"
+    if repo_registry.exists():
+        return repo_registry
+
+    return None
+
+
+def ensure_coding_conventions_from_docs(project_path: Path, tracker: StepTracker | None = None) -> None:
+    """Copy default coding conventions into `.specify/memory/conventions/`."""
+    registry_path = _get_conventions_registry_path()
+    step_name = "conventions"
+
+    if registry_path is None:
+        if tracker:
+            tracker.add(step_name, "初始化编码规范")
+            tracker.skip(step_name, "未找到规范清单")
+        return
+
+    try:
+        data = yaml.safe_load(registry_path.read_text(encoding="utf-8")) or {}
+    except Exception as e:
+        if tracker:
+            tracker.add(step_name, "初始化编码规范")
+            tracker.error(step_name, f"规范清单解析失败：{e}")
+        else:
+            console.print(f"[yellow]警告：无法解析编码规范清单：{e}[/yellow]")
+        return
+
+    conventions = data.get("conventions", [])
+    if not isinstance(conventions, list):
+        if tracker:
+            tracker.add(step_name, "初始化编码规范")
+            tracker.error(step_name, "规范清单格式无效")
+        else:
+            console.print("[yellow]警告：编码规范清单格式无效，跳过初始化[/yellow]")
+        return
+
+    target_dir = project_path / ".specify" / "memory" / CONVENTIONS_DIRNAME
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    copied: list[tuple[str, str]] = []
+    preserved = 0
+    skipped = 0
+
+    for convention in conventions:
+        if not isinstance(convention, dict):
+            skipped += 1
+            continue
+        if not convention.get("enabled_by_default", False):
+            continue
+
+        title = str(convention.get("title", "")).strip()
+        relative_path = str(convention.get("path", "")).strip()
+        if not title or not relative_path:
+            skipped += 1
+            continue
+
+        source_path = registry_path.parent / relative_path
+        if not source_path.exists():
+            skipped += 1
+            continue
+
+        destination = target_dir / source_path.name
+        if destination.exists():
+            preserved += 1
+        else:
+            shutil.copy2(source_path, destination)
+            copied.append((title, destination.name))
+
+    index_path = target_dir / "README.md"
+    index_lines = [
+        "# 项目编码规范索引",
+        "",
+        "以下规范在项目初始化时已启用。涉及对应领域实现时，应优先遵循这些项目规范。",
+        "",
+    ]
+
+    enabled_entries: list[tuple[str, str]] = []
+    for convention in conventions:
+        if not isinstance(convention, dict) or not convention.get("enabled_by_default", False):
+            continue
+        title = str(convention.get("title", "")).strip()
+        relative_path = str(convention.get("path", "")).strip()
+        if not title or not relative_path:
+            continue
+        filename = Path(relative_path).name
+        enabled_entries.append((title, filename))
+
+    if enabled_entries:
+        index_lines.append("## 已启用规范")
+        index_lines.append("")
+        for title, filename in enabled_entries:
+            index_lines.append(f"- [{title}](./{filename})")
+    else:
+        index_lines.append("当前没有默认启用的编码规范。")
+
+    index_lines.extend(
+        [
+            "",
+            "## 使用说明",
+            "",
+            "- 在规划、拆任务、实现前，先阅读与当前工作最相关的规范文件。",
+            "- 如项目规范与通用最佳实践冲突，以项目规范为准。",
+            "- 若需新增规范，可继续在此目录补充文档并更新索引。",
+        ]
+    )
+    index_path.write_text("\n".join(index_lines) + "\n", encoding="utf-8")
+
+    if tracker:
+        tracker.add(step_name, "初始化编码规范")
+        detail_parts = []
+        if copied:
+            detail_parts.append(f"新增 {len(copied)} 份")
+        if preserved:
+            detail_parts.append(f"保留 {preserved} 份")
+        if skipped:
+            detail_parts.append(f"跳过 {skipped} 份")
+        tracker.complete(step_name, "，".join(detail_parts) or "已生成索引")
+    else:
+        console.print(f"[cyan]已初始化编码规范目录：{target_dir.relative_to(project_path)}[/cyan]")
+
 # Agent-specific skill directory overrides for agents whose skills directory
 # doesn't follow the standard <agent_folder>/skills/ pattern
 AGENT_SKILLS_DIR_OVERRIDES = {
@@ -1699,6 +1829,7 @@ def init(
         ("extracted-summary", "解压摘要"),
         ("chmod", "确保脚本可执行"),
         ("constitution", "初始化章程"),
+        ("conventions", "初始化编码规范"),
     ]:
         tracker.add(key, label)
     if ai_skills:
@@ -1767,6 +1898,7 @@ def init(
             ensure_executable_scripts(project_path, tracker=tracker)
 
             ensure_constitution_from_template(project_path, tracker=tracker)
+            ensure_coding_conventions_from_docs(project_path, tracker=tracker)
 
             if ai_skills:
                 skills_ok = install_ai_skills(project_path, selected_ai, tracker=tracker)

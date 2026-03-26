@@ -90,10 +90,13 @@ $ARGUMENTS
 3. Load and analyze the implementation context:
    - **REQUIRED**: Read tasks.md for the complete task list and execution plan
    - **REQUIRED**: Read plan.md for tech stack, architecture, and file structure
+   - **IF EXISTS**: Read `.specify/memory/conventions/README.md` to discover project-specific coding conventions
+   - **IF EXISTS**: Read the relevant files under `.specify/memory/conventions/` for the current domain (for example interface responses, database mappers, ECP integration, frontend layout, or pagination)
    - **IF EXISTS**: Read data-model.md for entities and relationships
    - **IF EXISTS**: Read contracts/ for API specifications and test requirements
    - **IF EXISTS**: Read research.md for technical decisions and constraints
    - **IF EXISTS**: Read quickstart.md for integration scenarios
+   - **IMPORTANT**: If project-specific conventions conflict with generic best practices, follow the project-specific conventions first
 
 4. **Project Setup Verification**:
    - **REQUIRED**: Create/verify ignore files based on actual project setup:

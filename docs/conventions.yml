@@ -1,0 +1,21 @@
+conventions:
+  - id: axios-response
+    title: 前后端接口响应结构规约
+    path: axios-response-convention.md
+    enabled_by_default: true
+  - id: db-and-mapper
+    title: 数据库建表与 MyBatis Mapper 规约
+    path: db-and-mapper-convention.md
+    enabled_by_default: true
+  - id: ecp-platform
+    title: ECP 平台接口对接经验
+    path: ecp-platform-convention.md
+    enabled_by_default: true
+  - id: antd-searchbar-layout
+    title: Ant Design Vue 搜索栏布局规约
+    path: antd-searchbar-layout-convention.md
+    enabled_by_default: false
+  - id: antd-pagination
+    title: Ant Design Vue 列表分页配置规约
+    path: antd-pagination-convention.md
+    enabled_by_default: false

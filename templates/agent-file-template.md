@@ -20,6 +20,11 @@
 
 [LANGUAGE-SPECIFIC, ONLY FOR LANGUAGES IN USE]
 
+## 项目编码规范
+
+- 优先遵循 `.specify/memory/conventions/` 中的项目规范文档。
+- 若项目规范与通用最佳实践冲突，以项目规范为准。
+
 ## 最近变更
 
 [LAST 3 FEATURES AND WHAT THEY ADDED]

@@ -13,6 +13,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `MINOR`: backward-compatible new features, new commands, new agent support, or meaningful workflow capabilities added to the current release line.
 - `MAJOR`: breaking changes to CLI behavior, generated project structure, template contracts, or extension/catalog behavior that require user migration.
 
+## [0.6.0] - 2026-03-26
+
+### Added
+
+- Added a bundled `docs/conventions.yml` registry so `specify-zh init` can initialize project-specific coding conventions from curated documentation.
+- Added default convention copying into `.specify/memory/conventions/`, along with an auto-generated `README.md` index for newly initialized projects.
+
+### Changed
+
+- Updated the `implement` command template and agent context template to explicitly read project-specific convention files before implementation when they exist.
+- Packaged the default convention documents into the wheel so installations from `uv tool install specify-cli-zh --from git+...` keep the same initialization behavior as source checkouts.
+
 ## [0.5.0] - 2026-03-26
 
 ### Changed
