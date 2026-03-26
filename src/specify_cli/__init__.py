@@ -34,6 +34,8 @@ import shutil
 import shlex
 import json
 import yaml
+import platform
+from importlib import metadata as importlib_metadata
 from pathlib import Path
 from typing import Optional, Tuple
 
@@ -543,11 +545,9 @@ def _get_cli_distribution_version() -> tuple[str, str]:
     Returns:
         A (version, source) tuple where source is 'installed' or 'local'.
     """
-    import importlib.metadata
-
     for package_name in (DIST_NAME, "specify-cli"):
         try:
-            return importlib.metadata.version(package_name), "installed"
+            return importlib_metadata.version(package_name), "installed"
         except Exception:
             continue
 
@@ -692,9 +692,6 @@ def _check_github_connectivity(timeout: float = 5.0) -> tuple[bool, str]:
 
 def _collect_doctor_diagnostics(project_path: Path | None = None) -> dict:
     """Collect environment and project diagnostics for the doctor command."""
-    import shutil
-    import importlib.metadata
-
     current_path = project_path or Path.cwd()
     spec_dir = current_path / ".specify"
     has_github_token = bool(_github_token())
@@ -709,7 +706,7 @@ def _collect_doctor_diagnostics(project_path: Path | None = None) -> dict:
 
     dist_ok = False
     try:
-        importlib.metadata.version(DIST_NAME)
+        importlib_metadata.version(DIST_NAME)
         dist_ok = True
     except Exception:
         pass
@@ -1455,7 +1452,6 @@ def install_ai_skills(project_path: Path, selected_ai: str, tracker: StepTracker
 
 
 def _print_json_error(msg: str):
-    import sys, json
     sys.stdout.write(json.dumps({"status": "error", "message": msg}) + "\n")
 
 @app.command()
@@ -1736,7 +1732,6 @@ def init(
             console.print("执行内容: 将初始化 git 仓库")
         
         if json_output:
-            import sys
             json_data = {
                 "status": "dry-run",
                 "project_path": str(project_path),
@@ -2104,9 +2099,6 @@ def doctor():
 @app.command()
 def version():
     """显示版本与系统信息。"""
-    import platform
-    import shutil
-
     show_banner()
 
     # Get CLI version and run mode from package metadata

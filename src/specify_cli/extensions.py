@@ -9,6 +9,7 @@ Spec Kit 扩展管理器
 import json
 import hashlib
 import os
+import sys
 import tempfile
 import zipfile
 import shutil
@@ -1101,8 +1102,6 @@ class ExtensionCatalog:
         Raises:
             ValidationError: If a catalog URL is invalid
         """
-        import sys
-
         # 1. SPECKIT_CATALOG_URL env var replaces all defaults for backward compat
         if env_value := os.environ.get("SPECKIT_CATALOG_URL"):
             catalog_url = env_value.strip()
@@ -1242,8 +1241,6 @@ class ExtensionCatalog:
         Raises:
             ExtensionError: If all catalogs fail to fetch
         """
-        import sys
-
         active_catalogs = self.get_active_catalogs()
         merged: Dict[str, Dict[str, Any]] = {}
         any_success = False
@@ -1569,8 +1566,6 @@ class ConfigManager:
         Returns:
             Configuration dictionary from environment variables
         """
-        import os
-
         env_config = {}
         ext_id_upper = self.extension_id.replace("-", "_").upper()
         prefix = f"SPECKIT_{ext_id_upper}_"
@@ -1861,8 +1856,6 @@ class HookExecutor:
         Returns:
             True if condition is met, False otherwise
         """
-        import os
-
         condition = condition.strip()
 
         # Pattern: "config.key.path is set"

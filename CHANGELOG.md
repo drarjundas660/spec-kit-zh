@@ -13,6 +13,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `MINOR`: backward-compatible new features, new commands, new agent support, or meaningful workflow capabilities added to the current release line.
 - `MAJOR`: breaking changes to CLI behavior, generated project structure, template contracts, or extension/catalog behavior that require user migration.
 
+## [0.5.0] - 2026-03-26
+
+### Changed
+
+- Promoted repeated standard-library imports in the CLI and extension modules to module scope where appropriate, reducing the chance of local-name shadowing bugs.
+- Simplified version and doctor metadata lookups to reuse shared module-level imports for `platform`, `shutil`, and `importlib.metadata`.
+
+### Fixed
+
+- Removed additional function-local imports in `src/specify_cli/__init__.py` and `src/specify_cli/extensions.py` that could shadow module-level names such as `sys`, `shutil`, `os`, and `importlib.metadata`.
+
+## [0.4.1] - 2026-03-26
+
+### Fixed
+
+- Fixed an `UnboundLocalError` in `init()` where function-local `import sys` statements caused `sys.stdin.isatty()` to fail before script selection.
+- Reused the module-level `sys` import for JSON output paths so interactive initialization works correctly in both TTY and non-TTY contexts.
+
 ## [0.4.0] - 2026-03-20
 
 ### Changed
