@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/version-0.4.0-blue?style=flat" alt="Version"/>
+    <a href="https://github.com/loulanyue/spec-kit-zh/releases/latest"><img src="https://img.shields.io/github/v/release/loulanyue/spec-kit-zh?label=version&style=flat" alt="Version"/></a>
     <a href="https://github.com/loulanyue/spec-kit-zh/releases/latest"><img src="https://img.shields.io/github/v/release/loulanyue/spec-kit-zh?style=flat" alt="Latest Release"/></a>
     <a href="https://github.com/loulanyue/spec-kit-zh/stargazers"><img src="https://img.shields.io/github/stars/loulanyue/spec-kit-zh?style=flat" alt="GitHub stars"/></a>
     <a href="https://github.com/loulanyue/spec-kit-zh/blob/main/LICENSE"><img src="https://img.shields.io/github/license/loulanyue/spec-kit-zh?style=flat" alt="License"/></a>
