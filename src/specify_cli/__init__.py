@@ -68,6 +68,7 @@ client = httpx.Client(verify=ssl_context)
 BUNDLED_DOCS_DIR = Path(__file__).resolve().parent / "_bundled_docs"
 BUNDLED_TEMPLATES_DIR = Path(__file__).resolve().parent / "_bundled_templates"
 CONVENTIONS_DIRNAME = "conventions"
+CODEX_GLOBAL_PROMPTS_DIR = Path.home() / ".codex" / "prompts"
 
 def _github_token(cli_token: str | None = None) -> str | None:
     """Return sanitized GitHub token (cli arg takes precedence) or None."""
@@ -1383,21 +1384,13 @@ def _get_command_templates_dir() -> Path | None:
 
 
 def ensure_codex_prompts_from_templates(project_path: Path, selected_ai: str, tracker: StepTracker | None = None) -> None:
-    """Materialize Codex prompt files from bundled markdown templates when missing."""
+    """Materialize Codex prompt files into project and global prompt directories."""
     step_name = "codex-prompts"
 
     if selected_ai != "codex":
         if tracker:
             tracker.add(step_name, "补齐 Codex prompts")
             tracker.skip(step_name, "当前 agent 非 Codex")
-        return
-
-    prompts_dir = project_path / ".codex" / "prompts"
-    existing_prompts = sorted(prompts_dir.glob("*.md")) if prompts_dir.exists() else []
-    if existing_prompts:
-        if tracker:
-            tracker.add(step_name, "补齐 Codex prompts")
-            tracker.skip(step_name, f"已存在 {len(existing_prompts)} 个 prompt")
         return
 
     templates_dir = _get_command_templates_dir()
@@ -1418,18 +1411,37 @@ def ensure_codex_prompts_from_templates(project_path: Path, selected_ai: str, tr
             console.print("[yellow]警告：Codex prompt 模板目录为空，跳过补齐[/yellow]")
         return
 
-    prompts_dir.mkdir(parents=True, exist_ok=True)
+    target_dirs = [
+        project_path / ".codex" / "prompts",
+        CODEX_GLOBAL_PROMPTS_DIR,
+    ]
+
     created = 0
-    for template_file in command_templates:
-        destination = prompts_dir / f"speckit.{template_file.name}"
-        shutil.copy2(template_file, destination)
-        created += 1
+    preserved = 0
+    for target_dir in target_dirs:
+        target_dir.mkdir(parents=True, exist_ok=True)
+        for template_file in command_templates:
+            destination = target_dir / f"speckit.{template_file.name}"
+            if destination.exists():
+                preserved += 1
+                continue
+            shutil.copy2(template_file, destination)
+            created += 1
 
     if tracker:
         tracker.add(step_name, "补齐 Codex prompts")
-        tracker.complete(step_name, f"新增 {created} 个 prompt")
+        detail_parts = []
+        if created:
+            detail_parts.append(f"新增 {created} 个")
+        if preserved:
+            detail_parts.append(f"保留 {preserved} 个")
+        detail_parts.append(f"目标：{CODEX_GLOBAL_PROMPTS_DIR}")
+        tracker.complete(step_name, "，".join(detail_parts))
     else:
-        console.print(f"[cyan]已为 Codex 生成 {created} 个 prompt：{prompts_dir.relative_to(project_path)}[/cyan]")
+        console.print(
+            f"[cyan]已为 Codex 同步 prompts：[/cyan] "
+            f"{project_path / '.codex' / 'prompts'} 和 {CODEX_GLOBAL_PROMPTS_DIR}"
+        )
 
 # Agent-specific skill directory overrides for agents whose skills directory
 # doesn't follow the standard <agent_folder>/skills/ pattern
@@ -2069,36 +2081,57 @@ def init(
         step_num = 2
 
     # Add Codex-specific setup step if needed
-    if selected_ai == "codex":
-        codex_path = project_path / ".codex"
-        quoted_path = shlex.quote(str(codex_path))
-        if os.name == "nt":  # Windows
-            cmd = f"setx CODEX_HOME {quoted_path}"
-        else:  # Unix-like systems
-            cmd = f"export CODEX_HOME={quoted_path}"
-        
-        steps_lines.append(f"{step_num}. 在运行 Codex 前设置 [cyan]CODEX_HOME[/cyan] 环境变量：[cyan]{cmd}[/cyan]")
+    if selected_ai == "codex" and not ai_skills:
+        steps_lines.append(
+            f"{step_num}. Codex prompts 已同步到 [cyan]{CODEX_GLOBAL_PROMPTS_DIR}[/cyan]，"
+            "如当前会话未刷新，请重启 Codex 或重新打开工作区。"
+        )
         step_num += 1
 
-    steps_lines.append(f"{step_num}. 开始使用 slash commands 与你的 AI 助手协作：")
+    if ai_skills:
+        steps_lines.append(f"{step_num}. 开始使用已安装的 agent skills 与你的 AI 助手协作：")
+        if selected_ai == "codex":
+            steps_lines.append("   2.1 使用 [cyan]speckit-constitution[/] skill 建立项目原则")
+            steps_lines.append("   2.2 使用 [cyan]speckit-specify[/] skill 创建基础规范")
+            steps_lines.append("   2.3 使用 [cyan]speckit-plan[/] skill 生成实施计划")
+            steps_lines.append("   2.4 使用 [cyan]speckit-tasks[/] skill 生成可执行任务")
+            steps_lines.append("   2.5 使用 [cyan]speckit-implement[/] skill 执行实施")
+            steps_lines.append("   [dim]提示：在 Codex 中可直接点名 skill，例如“使用 speckit-constitution 这个 skill，……”[/dim]")
+        else:
+            steps_lines.append("   2.1 使用 [cyan]speckit-constitution[/] skill 建立项目原则")
+            steps_lines.append("   2.2 使用 [cyan]speckit-specify[/] skill 创建基础规范")
+            steps_lines.append("   2.3 使用 [cyan]speckit-plan[/] skill 生成实施计划")
+            steps_lines.append("   2.4 使用 [cyan]speckit-tasks[/] skill 生成可执行任务")
+            steps_lines.append("   2.5 使用 [cyan]speckit-implement[/] skill 执行实施")
+    else:
+        steps_lines.append(f"{step_num}. 开始使用 slash commands 与你的 AI 助手协作：")
 
-    steps_lines.append("   2.1 [cyan]/speckit.constitution[/] - 建立项目原则")
-    steps_lines.append("   2.2 [cyan]/speckit.specify[/] - 创建基础规范")
-    steps_lines.append("   2.3 [cyan]/speckit.plan[/] - 生成实施计划")
-    steps_lines.append("   2.4 [cyan]/speckit.tasks[/] - 生成可执行任务")
-    steps_lines.append("   2.5 [cyan]/speckit.implement[/] - 执行实施")
+        steps_lines.append("   2.1 [cyan]/speckit.constitution[/] - 建立项目原则")
+        steps_lines.append("   2.2 [cyan]/speckit.specify[/] - 创建基础规范")
+        steps_lines.append("   2.3 [cyan]/speckit.plan[/] - 生成实施计划")
+        steps_lines.append("   2.4 [cyan]/speckit.tasks[/] - 生成可执行任务")
+        steps_lines.append("   2.5 [cyan]/speckit.implement[/] - 执行实施")
 
     steps_panel = Panel("\n".join(steps_lines), title="后续步骤", border_style="cyan", padding=(1,2))
     console.print()
     console.print(steps_panel)
 
-    enhancement_lines = [
-        "这些是可选命令，可用于提升规范质量与信心 [bright_black](improve quality & confidence)[/bright_black]",
-        "",
-        "○ [cyan]/speckit.clarify[/] [bright_black](可选)[/bright_black] - 在规划前用结构化提问消除模糊点（若使用，请在 [cyan]/speckit.plan[/] 前执行）",
-        "○ [cyan]/speckit.analyze[/] [bright_black](可选)[/bright_black] - 生成跨制品一致性与对齐分析（在 [cyan]/speckit.tasks[/] 之后、[cyan]/speckit.implement[/] 之前执行）",
-        "○ [cyan]/speckit.checklist[/] [bright_black](可选)[/bright_black] - 生成质量检查清单，验证需求完整性、清晰度与一致性（在 [cyan]/speckit.plan[/] 之后执行）"
-    ]
+    if ai_skills:
+        enhancement_lines = [
+            "这些是可选 skills，可用于提升规范质量与信心 [bright_black](improve quality & confidence)[/bright_black]",
+            "",
+            "○ [cyan]speckit-clarify[/] [bright_black](可选)[/bright_black] - 在规划前用结构化提问消除模糊点",
+            "○ [cyan]speckit-analyze[/] [bright_black](可选)[/bright_black] - 生成跨制品一致性与对齐分析",
+            "○ [cyan]speckit-checklist[/] [bright_black](可选)[/bright_black] - 生成质量检查清单，验证需求完整性、清晰度与一致性",
+        ]
+    else:
+        enhancement_lines = [
+            "这些是可选命令，可用于提升规范质量与信心 [bright_black](improve quality & confidence)[/bright_black]",
+            "",
+            "○ [cyan]/speckit.clarify[/] [bright_black](可选)[/bright_black] - 在规划前用结构化提问消除模糊点（若使用，请在 [cyan]/speckit.plan[/] 前执行）",
+            "○ [cyan]/speckit.analyze[/] [bright_black](可选)[/bright_black] - 生成跨制品一致性与对齐分析（在 [cyan]/speckit.tasks[/] 之后、[cyan]/speckit.implement[/] 之前执行）",
+            "○ [cyan]/speckit.checklist[/] [bright_black](可选)[/bright_black] - 生成质量检查清单，验证需求完整性、清晰度与一致性（在 [cyan]/speckit.plan[/] 之后执行）"
+        ]
     enhancements_panel = Panel("\n".join(enhancement_lines), title="增强命令", border_style="cyan", padding=(1,2))
     console.print()
     console.print(enhancements_panel)

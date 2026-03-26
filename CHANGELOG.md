@@ -13,6 +13,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `MINOR`: backward-compatible new features, new commands, new agent support, or meaningful workflow capabilities added to the current release line.
 - `MAJOR`: breaking changes to CLI behavior, generated project structure, template contracts, or extension/catalog behavior that require user migration.
 
+## [0.7.0] - 2026-03-26
+
+### Added
+
+- Added direct Codex slash-command support by synchronizing `speckit.*.md` prompt files into `~/.codex/prompts/` during `specify-zh init --ai codex`.
+
+### Changed
+
+- Updated Codex post-init guidance and documentation to use `~/.codex/prompts/` as the primary prompt location, while keeping project-local `.codex/prompts/` as a compatibility copy.
+- Kept Codex `--ai-skills` guidance separate from slash-command guidance so users can distinguish `speckit-*` skills from `/speckit.*` commands.
+
+## [0.6.2] - 2026-03-26
+
+### Changed
+
+- Clarified the difference between Codex slash-command mode and Codex skills mode in the README and upgrade guide, especially when `--ai-skills` is used.
+- Updated post-init guidance so Codex projects initialized with `--ai-skills` now recommend `speckit-*` skills instead of incorrectly instructing users to run `/speckit.*` slash commands.
+
 ## [0.6.1] - 2026-03-26
 
 ### Fixed

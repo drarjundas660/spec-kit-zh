@@ -357,6 +357,9 @@ specify-zh init my-project --ai claude --ai-skills
 # Initialize in current directory with agent skills
 specify-zh init --here --ai gemini --ai-skills
 
+# Codex + skills 模式
+specify-zh init --here --ai codex --ai-skills
+
 # Generic 模式下接入已有命令目录并安装 skills
 specify-zh init my-project --ai generic --ai-commands-dir .myagent/commands/ --ai-skills
 
@@ -366,7 +369,11 @@ specify-zh check
 
 ### 可用斜杠命令 (Available Slash Commands)
 
-运行 `specify-zh init` 后，你的 AI 代码代理将获得以下斜杠命令用于结构化开发：
+默认情况下，运行 `specify-zh init` 后，你的 AI 代码代理将获得以下斜杠命令用于结构化开发。
+
+> [!IMPORTANT]
+> 如果你使用了 `--ai-skills`，那么安装结果会变成 `skills` 形态，而不是 `/speckit.*` 斜杠命令形态。
+> 尤其是 Codex：此时你通常会看到 `.agents/skills/speckit-*`，而不是 `.codex/prompts/`。
 
 #### 核心命令 (Core Commands)
 
@@ -529,10 +536,10 @@ specify-zh init <project_name> --ai claude --ignore-agent-tools
 
 如果看到 AI 助手中出现了 `/speckit.constitution`, `/speckit.specify`, `/speckit.plan`, `/speckit.tasks` 及 `/speckit.implement` 等命令，即代表配置正确。
 
-对于 Codex，也可以直接检查项目内是否存在以下文件：
+对于 Codex，优先检查全局 prompts 目录是否存在以下文件：
 
 ```bash
-ls -la .codex/prompts/
+ls -la ~/.codex/prompts/
 ```
 
 正常情况下你会看到：
@@ -543,6 +550,30 @@ speckit.specify.md
 speckit.plan.md
 speckit.tasks.md
 speckit.implement.md
+```
+
+`specify-zh` 现在会在初始化 Codex 项目时同步这些 prompts 到 `~/.codex/prompts/`。项目内的 `.codex/prompts/` 仅作为兼容副本保留。
+
+如果你初始化时用了 `--ai-skills`，那么对 Codex 来说更应该检查的是：
+
+```bash
+ls -la .agents/skills/
+```
+
+正常情况下你会看到：
+
+```text
+speckit-constitution/
+speckit-specify/
+speckit-plan/
+speckit-tasks/
+speckit-implement/
+```
+
+这时不要再使用 `/speckit.constitution`。更合适的做法是直接在对话里点名 skill，例如：
+
+```text
+使用 speckit-constitution 这个 skill，创建强调代码质量、测试标准、用户体验一致性与性能要求的项目原则。
 ```
 
 开发的第一步，是使用 `/speckit.constitution` 命令确立该项目的章程 (Constitution)。这能确保在后续所有阶段技术决策和表现具备一致性。

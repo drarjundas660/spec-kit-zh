@@ -399,7 +399,11 @@ The `specify-zh` CLI tool is used for:
 - **Upgrades:** `specify-zh init --here --force` to update templates and commands
 - **Diagnostics:** `specify-zh check` to verify tool installation
 
-Once you've run `specify-zh init`, the slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) are **permanently installed** in your project's agent folder (`.claude/`, `.codex/prompts/`, `.github/agents/`, etc.). Your AI assistant reads these command files directly—no need to run `specify-zh` again.
+Once you've run `specify-zh init`, the slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) are installed into the agent-specific prompt location. For Codex, `specify-zh` now syncs them to `~/.codex/prompts/` and keeps a project-local `.codex/prompts/` copy for compatibility. Your AI assistant reads these command files directly—no need to run `specify-zh` again.
+
+> [!IMPORTANT]
+> If you initialized with `--ai-skills`, your agent may receive `skills` instead of slash commands.
+> For Codex specifically, this usually means `.agents/skills/speckit-*` rather than `.codex/prompts/speckit.*.md`.
 
 **If your agent isn't recognizing slash commands:**
 
@@ -410,7 +414,7 @@ Once you've run `specify-zh init`, the slash commands (like `/speckit.specify`, 
    ls -la .claude/commands/
 
    # For Codex
-   ls -la .codex/prompts/
+   ls -la ~/.codex/prompts/
 
    # For GitHub Copilot
    ls -la .github/agents/
@@ -428,6 +432,26 @@ Once you've run `specify-zh init`, the slash commands (like `/speckit.specify`, 
 
    For Codex, use `/speckit.constitution ...` directly.
    Do not use `/prompt.speckit.constitution` or `/prompts.speckit.constitution`.
+
+**If you initialized with `--ai-skills` instead of slash commands:**
+
+1. **Verify the skills exist:**
+
+   ```bash
+   ls -la .agents/skills/
+   ```
+
+2. **For Codex, do not expect `/speckit.*` to exist**
+
+   In skills mode, `speckit-constitution`, `speckit-specify`, and the other `speckit-*` entries are installed as skills, not slash commands.
+
+3. **Invoke the skill by name in chat**
+
+   Example:
+
+   ```text
+   Use the speckit-constitution skill to create project principles focused on code quality, testing standards, UX consistency, and performance.
+   ```
 
 **Related issue:** If Copilot can't open local files or uses PowerShell commands unexpectedly, this is typically an IDE context issue, not related to `specify-zh`. Try:
 
